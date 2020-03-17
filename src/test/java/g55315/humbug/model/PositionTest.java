@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests position. 
+ * Tests position.
+ *
  * @author Pierre Bettens (pbt) <pbettens@he2b.be>
  */
 public class PositionTest {
@@ -23,7 +24,7 @@ public class PositionTest {
         Position result = instance.next(Direction.NORTH);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of next method, of class Position.
      */
@@ -63,39 +64,33 @@ public class PositionTest {
     @Test
     public void testEquals_sameobject() {
         System.out.println("equals some object");
-        Position position1 = new Position(2,3);
+        Position position1 = new Position(2, 3);
         assertTrue(position1.equals(position1));
     }
 
     @Test
     public void testEquals_differentreference() {
         System.out.println("equals differents references");
-        Position position1 = new Position(2,3);
-        Position position2 = new Position(2,3);
+        Position position1 = new Position(2, 3);
+        Position position2 = new Position(2, 3);
         assertTrue(position1.equals(position2));
     }
-
 
     @Test
     public void testEquals_differentobject() {
         System.out.println("equals differents objects");
-        Position position1 = new Position(2,3);
-        Position position2 = new Position(1,4);
+        Position position1 = new Position(2, 3);
+        Position position2 = new Position(1, 4);
         assertFalse(position1.equals(position2));
     }
 
     @Test
     public void testHashcode_1() {
         System.out.println("hashcode");
-        Position position1 = new Position(1,2);
-        Position position2 = new Position(1,2);
+        Position position1 = new Position(1, 2);
+        Position position2 = new Position(1, 2);
         assertTrue(position1.hashCode() == position1.hashCode());
         assertTrue(position1.hashCode() == position2.hashCode());
     }
 
-   
-    
-    
-    
-    
 }

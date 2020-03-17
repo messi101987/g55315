@@ -36,13 +36,17 @@ public class Position {
 
     /**
      * a simple getter for the row
-     *
      * @return the value of row
      */
     public int getRow() {
         return row;
     }
     
+    /**
+     * computes the next position according to a Direction
+     * @param d the direction in which the position moves
+     * @return the new Position
+     */
     public Position next(Direction d){
         return new Position(row + d.getDeltaRow(), column + d.getDeltaColumn());
     }

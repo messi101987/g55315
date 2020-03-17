@@ -15,17 +15,16 @@ public class Square {
     private SquareType type;
 
     /**
-     *   Constructor of Square on board. * @param type Square is grass or
-     * star
-
+     * Constructor of Square on board. 
+     * @param type Square is grass or star
      */
     public Square(SquareType type) {
         this.type = type;
     }
 
     /**
-     *  * Simple getter of type. * @return type of Square
-
+     * Simple getter of type. 
+     * @return type of Square
      */
     public SquareType getType() {
         return type;

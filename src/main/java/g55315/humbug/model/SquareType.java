@@ -6,6 +6,7 @@ package g55315.humbug.model;
  * Square are grass or star when there represent arrival.
  * @author oscartison
  */
+
 public enum SquareType {
     GRASS, STAR;
 }

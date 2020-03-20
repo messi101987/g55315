@@ -15,13 +15,13 @@ import java.util.Scanner;
  *
  * @author oscartison
  */
-public class View {
+public class View implements InterfaceView{
 
     /**
      * prints the content of a Board
      * @param board the board that needs to be displayed
      */
-    public static void displayBoard(Board board) {
+    public void displayBoard(Board board) {
         String[][] boardString = new String[board.getNbRow()][board.getNbColumn()];
         for (int i = 0; i < board.getNbRow(); i++) {
             for (int j = 0; j < board.getNbColumn(); j++) {
@@ -89,7 +89,7 @@ public class View {
      * asks a direction to the user
      * @return the direction given by the user.
      */
-    public static Direction askDirection(){
+    public Direction askDirection(){
         Scanner clavier = new Scanner(System.in);
         System.out.println("Veuillez entrer une direction: ");
         String dir = clavier.next();
@@ -114,10 +114,9 @@ public class View {
         }
         return d;
     }
-    
-    
-    public static void main(String[] args) {
-        askDirection();
-    }
 
+    @Override
+    public void displayError() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

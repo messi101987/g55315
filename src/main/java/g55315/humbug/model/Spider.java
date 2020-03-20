@@ -9,21 +9,21 @@ package g55315.humbug.model;
  *
  * @author oscartison
  */
-public class Snail extends Animal {
+public class Spider extends Animal {
 
-    public Snail(Position pos) {
+    public Spider(Position pos) {
         super(pos);
     }
 
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
-        if (board.isInside(pos.next(direction))) {
-            if (isNextFree(pos, direction, animals)) {
-                pos = this.getPositionOnBoard().next(direction);
-                this.setPositionOnBoard(pos);
-            }
-        } else {
+        while (isNextFree(pos, direction, animals) && board.isInside(pos)) {
+            pos = this.getPositionOnBoard().next(direction);
+            this.setPositionOnBoard(pos);
+
+        }
+        if (!board.isInside(pos)) {
             pos = null;
             this.setPositionOnBoard(null);
         }

@@ -56,12 +56,13 @@ public class View implements InterfaceView{
      * displays an error message
      * @param message the error message to display
      */
+    @Override
     public void displayError(String message){
         System.out.println("message");
     }
     
     /**
-     * reads an integer from the user.
+     * reads an integer from the user. (I had already written this code during DEV1)
      * @param message the message to show to ask an integer to the user
      * @return the integer given by the user
      */

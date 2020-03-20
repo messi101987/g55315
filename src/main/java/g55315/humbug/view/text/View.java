@@ -17,6 +17,10 @@ import java.util.Scanner;
  */
 public class View {
 
+    /**
+     * prints the content of a Board
+     * @param board the board that needs to be displayed
+     */
     public static void displayBoard(Board board) {
         String[][] boardString = new String[board.getNbRow()][board.getNbColumn()];
         for (int i = 0; i < board.getNbRow(); i++) {
@@ -47,12 +51,20 @@ public class View {
         }
     }
     
+    /**
+     * displays an error message
+     * @param message the error message to display
+     */
     public void displayError(String message){
         System.out.println("message");
     }
     
-    
-    public static int lireEntier(String message) {
+    /**
+     * reads an integer from the user.
+     * @param message the message to show to ask an integer to the user
+     * @return the integer given by the user
+     */
+    public static int readInt(String message) {
         Scanner clavier = new Scanner(System.in); 
         System.out.println(message);
         while(!clavier.hasNextInt()) { 
@@ -63,13 +75,20 @@ public class View {
         return clavier.nextInt();
     }
     
-    
+    /**
+     * asks a position to the user.
+     * @return an object Position with the values given by the user.
+     */
     public Position askPosition(){
-        int pos_x = lireEntier("please enter a x value ");
-        int pos_y = lireEntier("Please enter an y value ");
+        int pos_x = readInt("please enter a x value ");
+        int pos_y = readInt("Please enter an y value ");
         return new Position(pos_x, pos_y);
         }
     
+    /**
+     * asks a direction to the user
+     * @return the direction given by the user.
+     */
     public static Direction askDirection(){
         Scanner clavier = new Scanner(System.in);
         System.out.println("Veuillez entrer une direction: ");

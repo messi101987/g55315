@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
@@ -11,10 +6,23 @@ package g55315.humbug.model;
  */
 public class Spider extends Animal {
 
+    /**
+     * a constructor for the class Spider
+     *
+     * @param pos the position on which the spider is created
+     */
     public Spider(Position pos) {
         super(pos);
     }
 
+    /**
+     * moves the spider in a certain direction if possible
+     *
+     * @param board the board on which the spider is located
+     * @param direction the direction in which the spider tries to move
+     * @param animals an array of the other animals on the board
+     * @return the new position of the spider
+     */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();

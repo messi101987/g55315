@@ -21,6 +21,7 @@ public class View implements InterfaceView{
      * prints the content of a Board
      * @param board the board that needs to be displayed
      */
+    @Override
     public void displayBoard(Board board) {
         String[][] boardString = new String[board.getNbRow()][board.getNbColumn()];
         for (int i = 0; i < board.getNbRow(); i++) {
@@ -64,7 +65,7 @@ public class View implements InterfaceView{
      * @param message the message to show to ask an integer to the user
      * @return the integer given by the user
      */
-    public static int readInt(String message) {
+    public int readInt(String message) {
         Scanner clavier = new Scanner(System.in); 
         System.out.println(message);
         while(!clavier.hasNextInt()) { 
@@ -79,6 +80,7 @@ public class View implements InterfaceView{
      * asks a position to the user.
      * @return an object Position with the values given by the user.
      */
+    @Override
     public Position askPosition(){
         int pos_x = readInt("please enter a x value ");
         int pos_y = readInt("Please enter an y value ");
@@ -89,6 +91,7 @@ public class View implements InterfaceView{
      * asks a direction to the user
      * @return the direction given by the user.
      */
+    @Override
     public Direction askDirection(){
         Scanner clavier = new Scanner(System.in);
         System.out.println("Veuillez entrer une direction: ");
@@ -115,8 +118,5 @@ public class View implements InterfaceView{
         return d;
     }
 
-    @Override
-    public void displayError() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 }

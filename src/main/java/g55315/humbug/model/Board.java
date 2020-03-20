@@ -53,6 +53,10 @@ public class Board {
         }
         return this.squares[pos.getRow()][pos.getColumn()].getType();
     }
+
+    public void setSquareGrass(Position pos) {
+        this.squares[pos.getRow()][pos.getColumn()] = new Square(SquareType.GRASS);
+    }
     
     /**
      * 

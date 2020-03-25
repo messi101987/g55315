@@ -13,7 +13,11 @@ import java.util.Scanner;
  */
 public class View implements InterfaceView {
 
-    
+    /**
+     * makes a 2D array of Strings of the game board
+     * @param board the board that needs to  be changed in an array
+     * @return the 2d array of Strings
+     */
     public static String[][] makeStringBoard(Board board){
         String[][] boardString = new String[board.getNbRow()][board.getNbColumn()];
         for (int i = 0; i < board.getNbRow(); i++) {
@@ -33,9 +37,14 @@ public class View implements InterfaceView {
         }
         return boardString;
     }
-    
-    
-    public static void displayStringBoard(Board board, String[][] boardString, Animal[] animals){
+    /**
+     * prints the content of a Board
+     *
+     * @param board the board that needs to be displayed
+     */
+    @Override
+    public void displayBoard(Board board, Animal... animals) {
+        String[][] boardString = makeStringBoard(board);
         for (int i = 0; i < board.getNbRow(); i++) {
             for (int x = 0; x < 5; x++) {
                 for (int j = 0; j < board.getNbColumn(); j++) {
@@ -85,17 +94,7 @@ public class View implements InterfaceView {
             }
         }
     }
-    /**
-     * prints the content of a Board
-     *
-     * @param board the board that needs to be displayed
-     */
-    @Override
-    public void displayBoard(Board board, Animal... animals) {
-        String[][] boardString = makeStringBoard(board);
-        displayStringBoard(board, String[][] boardString, animals);
-    }
-    Ï
+   
 
     /**
      * displays an error message
@@ -103,7 +102,6 @@ public class View implements InterfaceView {
      * @param message the error message to display
      */
     @Override
-
     public void displayError(String message) {
         System.out.println("message");
     }

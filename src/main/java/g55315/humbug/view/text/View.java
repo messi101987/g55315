@@ -41,6 +41,7 @@ public class View implements InterfaceView {
      * prints the content of a Board
      *
      * @param board the board that needs to be displayed
+     * @param animals the animals in the game board
      */
     @Override
     public void displayBoard(Board board, Animal... animals) {
@@ -48,7 +49,7 @@ public class View implements InterfaceView {
         for (int i = 0; i < board.getNbRow(); i++) {
             for (int x = 0; x < 5; x++) {
                 for (int j = 0; j < board.getNbColumn(); j++) {
-                    String star = "";
+                    String star;
 
                     if (boardString[i][j].equals("star") && x == 1) {
                         star = "\033[31m*\033[30m";

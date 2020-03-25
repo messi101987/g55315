@@ -10,10 +10,11 @@ import java.util.Scanner;
  *
  * @author oscartison
  */
-public class View implements InterfaceView{
+public class View implements InterfaceView {
 
     /**
      * prints the content of a Board
+     *
      * @param board the board that needs to be displayed
      */
     @Override
@@ -24,95 +25,122 @@ public class View implements InterfaceView{
                 Position pos = new Position(i, j);
                 if (board.isInside(pos)) {
                     if (board.getSquareType(pos) == SquareType.GRASS) {
-                        boardString[i][j] = "grass ";
+                        boardString[i][j] = "grass";
                     } else if (board.getSquareType(pos) == SquareType.STAR) {
-                        boardString[i][j] = "star ";
+                        boardString[i][j] = "star";
 
                     }
                 } else {
-                    boardString[i][j] = "      ";
+                    boardString[i][j] = "null";
                 }
             }
         }
-        int col = 0;
-        int row = 0;
-        for (int i = 0; i < board.getNbColumn() * board.getNbRow(); i++) {
-            System.out.print(boardString[row][col]);
-            col = col + 1;
-            if (col == board.getNbColumn()) {
-                col = 0;
-                row = row + 1;
+        for (int i = 0; i < board.getNbRow(); i++) {
+            for (int x = 0; x < 5; x++) {
+                for (int j = 0; j < board.getNbColumn(); j++) {
+                    String star = "";
+                    if (boardString[i][j].equals("star")) {
+                        star = "*";
+                    } else {
+                        star = "";
+                    }
+
+                    if (x == 4 || x == 0) {
+                        if (!boardString[i][j].equals("null") || (x == 4 && !boardString[i + 1][j].equals("null"))) {
+                            System.out.print("\033[42;38;1m----\033[0m");
+
+                        } else {
+                            System.out.print("     ");
+                        }
+                    } else if (x != 4) {
+                        if (!boardString[i][j].equals("null")) {
+                            if (j != 0 && !boardString[i][j - 1].equals("null")) {
+                                System.out.print("\033[42;38;1m " + star + "  |\033[0m");
+                            } else {
+                                System.out.print("\033[42;38;1m| " + star + "  |\033[0m");
+                            }
+
+                        } else {
+                            System.out.print("    ");
+                        }
+
+                    }
+                }
                 System.out.println("");
             }
         }
     }
-    
+
     /**
      * displays an error message
+     *
      * @param message the error message to display
      */
     @Override
-    public void displayError(String message){
+    public void displayError(String message) {
         System.out.println("message");
     }
-    
+
     /**
-     * reads an integer from the user. (I had already written this code during DEV1)
+     * reads an integer from the user. (I had already written this code during
+     * DEV1)
+     *
      * @param message the message to show to ask an integer to the user
      * @return the integer given by the user
      */
     public int readInt(String message) {
-        Scanner clavier = new Scanner(System.in); 
+        Scanner clavier = new Scanner(System.in);
         System.out.println(message);
-        while(!clavier.hasNextInt()) { 
-            clavier.next(); 
-            System.out.println("The given number is not an integer"); 
+        while (!clavier.hasNextInt()) {
+            clavier.next();
+            System.out.println("The given number is not an integer");
             System.out.println(message);
         }
         return clavier.nextInt();
     }
-    
+
     /**
      * asks a position to the user.
+     *
      * @return an object Position with the values given by the user.
      */
     @Override
-    public Position askPosition(){
+    public Position askPosition() {
         int pos_x = readInt("please enter a x value ");
         int pos_y = readInt("Please enter an y value ");
         return new Position(pos_x, pos_y);
-        }
-    
+    }
+
     /**
      * asks a direction to the user
+     *
      * @return the direction given by the user.
      */
     @Override
-    public Direction askDirection(){
+    public Direction askDirection() {
         Scanner clavier = new Scanner(System.in);
         System.out.println("Veuillez entrer une direction: ");
         String dir = clavier.next();
         Direction d;
-        while(!(dir.equals("NORTH") || dir.equals("SOUTH") || dir.equals("EAST") || dir.equals("WEST"))){
+        while (!(dir.equals("NORTH") || dir.equals("SOUTH") || dir.equals("EAST") || dir.equals("WEST"))) {
             System.out.println("Direction incorrecte, veuillez ressayer. ");
             dir = clavier.next();
         }
-        switch(dir){
+        switch (dir) {
             case "NORTH":
-                    d = Direction.NORTH;
-                    break;
+                d = Direction.NORTH;
+                break;
             case "SOUTH":
-                    d = Direction.SOUTH;
-                    break;
+                d = Direction.SOUTH;
+                break;
             case "WEST":
-                    d = Direction.WEST;
-                    break;
+                d = Direction.WEST;
+                break;
             default:
-                    d = Direction.EAST;
-                    break;
+                d = Direction.EAST;
+                break;
         }
         return d;
     }
-
 
 }

@@ -42,4 +42,11 @@ public class Spider extends Animal {
         return pos;
     }
 
+    @Override
+    public String toString() {
+        return "s"; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+
 }

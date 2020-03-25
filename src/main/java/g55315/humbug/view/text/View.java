@@ -1,5 +1,6 @@
 package g55315.humbug.view.text;
 
+import g55315.humbug.model.Animal;
 import g55315.humbug.model.Board;
 import g55315.humbug.model.Direction;
 import g55315.humbug.model.Position;
@@ -12,13 +13,8 @@ import java.util.Scanner;
  */
 public class View implements InterfaceView {
 
-    /**
-     * prints the content of a Board
-     *
-     * @param board the board that needs to be displayed
-     */
-    @Override
-    public void displayBoard(Board board) {
+    
+    public static String[][] makeStringBoard(Board board){
         String[][] boardString = new String[board.getNbRow()][board.getNbColumn()];
         for (int i = 0; i < board.getNbRow(); i++) {
             for (int j = 0; j < board.getNbColumn(); j++) {
@@ -35,33 +31,52 @@ public class View implements InterfaceView {
                 }
             }
         }
+        return boardString;
+    }
+    
+    
+    public static void displayStringBoard(Board board, String[][] boardString, Animal[] animals){
         for (int i = 0; i < board.getNbRow(); i++) {
             for (int x = 0; x < 5; x++) {
                 for (int j = 0; j < board.getNbColumn(); j++) {
                     String star = "";
-                    if (boardString[i][j].equals("star")) {
-                        star = "*";
+
+                    if (boardString[i][j].equals("star") && x == 1) {
+                        star = "\033[31m*\033[30m";
                     } else {
-                        star = "";
+                        star = " ";
+                    }
+                    if (x == 1) {
+                        for (Animal a : animals) {
+                            if (a.getPositionOnBoard().equals(new Position(i, j))) {
+                                star = a.toString();
+                            }
+                        }
                     }
 
-                    if (x == 4 || x == 0) {
-                        if (!boardString[i][j].equals("null") || (x == 4 && !boardString[i + 1][j].equals("null"))) {
-                            System.out.print("\033[42;38;1m----\033[0m");
+                    if (x == 4 || (x == 0 && i == 0)) {
+                        if (i == board.getNbRow() - 1) {
+                            if (!boardString[i][j].equals("null")) {
+                                System.out.print("\033[42;38;1m------\033[0m");
+                            } else {
+                                System.out.print("      ");
+                            }
+                        } else if (!boardString[i][j].equals("null") || (x == 4 && !boardString[i + 1][j].equals("null"))) {
+                            System.out.print("\033[42;38;1m------\033[0m");
 
                         } else {
-                            System.out.print("     ");
+                            System.out.print("      ");
                         }
-                    } else if (x != 4) {
+                    } else {
                         if (!boardString[i][j].equals("null")) {
                             if (j != 0 && !boardString[i][j - 1].equals("null")) {
                                 System.out.print("\033[42;38;1m " + star + "  |\033[0m");
                             } else {
-                                System.out.print("\033[42;38;1m| " + star + "  |\033[0m");
+                                System.out.print("\033[42;38;1m|  " + star + " |\033[0m");
                             }
 
                         } else {
-                            System.out.print("    ");
+                            System.out.print("      ");
                         }
 
                     }
@@ -70,6 +85,17 @@ public class View implements InterfaceView {
             }
         }
     }
+    /**
+     * prints the content of a Board
+     *
+     * @param board the board that needs to be displayed
+     */
+    @Override
+    public void displayBoard(Board board, Animal... animals) {
+        String[][] boardString = makeStringBoard(board);
+        displayStringBoard(board, String[][] boardString, animals);
+    }
+    Ï
 
     /**
      * displays an error message
@@ -77,6 +103,7 @@ public class View implements InterfaceView {
      * @param message the error message to display
      */
     @Override
+
     public void displayError(String message) {
         System.out.println("message");
     }

@@ -9,7 +9,7 @@ import g55315.humbug.model.Position;
  * @author oscartison
  */
 public interface InterfaceView {
-    void displayBoard(Board b);
+    void displayBoard(Board b, Animal... animals);
     Position askPosition();
     Direction askDirection();
     void displayError(String message);

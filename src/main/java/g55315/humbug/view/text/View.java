@@ -132,8 +132,8 @@ public class View implements InterfaceView {
      */
     @Override
     public Position askPosition() {
-        int pos_x = readInt("please enter a x value ");
-        int pos_y = readInt("Please enter an y value ");
+        int pos_x = readInt("please enter a x position ");
+        int pos_y = readInt("Please enter an y position ");
         return new Position(pos_x, pos_y);
     }
 
@@ -145,11 +145,11 @@ public class View implements InterfaceView {
     @Override
     public Direction askDirection() {
         Scanner clavier = new Scanner(System.in);
-        System.out.println("Veuillez entrer une direction: ");
+        System.out.println("Please enter a direction: ");
         String dir = clavier.next();
         Direction d;
         while (!(dir.equals("NORTH") || dir.equals("SOUTH") || dir.equals("EAST") || dir.equals("WEST"))) {
-            System.out.println("Direction incorrecte, veuillez ressayer. ");
+            System.out.println("Wrong direction , please try again ");
             dir = clavier.next();
         }
         switch (dir) {

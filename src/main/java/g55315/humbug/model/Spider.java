@@ -26,16 +26,16 @@ public class Spider extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
-        while (isNextFree(pos, direction, animals) && board.isInside(pos)) {
-            pos = this.getPositionOnBoard().next(direction);
-            this.setPositionOnBoard(pos);
+        while (pos != null && isNextFree(pos, direction, animals)) {
+            pos = pos.next(direction);
+            if (!board.isInside(pos)) {
+                pos = null;
+            }
+        }
 
-        }
-        if (!board.isInside(pos)) {
-            pos = null;
-            this.setPositionOnBoard(null);
-        }
-        if (board.getSquareType(pos) == SquareType.STAR) {
+        this.setPositionOnBoard(pos);
+
+        if ((pos != null) && (board.getSquareType(pos) == SquareType.STAR)) {
             this.setOnStar(true);
             board.setSquareGrass(pos);
         }
@@ -44,9 +44,7 @@ public class Spider extends Animal {
 
     @Override
     public String toString() {
-        return "s"; //To change body of generated methods, choose Tools | Templates.
+        return "s";
     }
-    
-    
 
 }

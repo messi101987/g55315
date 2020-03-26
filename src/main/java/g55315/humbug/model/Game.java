@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
- *
+ * the class game implements the interface Model
  * @author oscartison
  */
 public class Game implements Model {
-
+    
+    /**
+     * this is 
+     */
     private Board board;
 
     private Animal[] animals;
@@ -36,12 +34,31 @@ public class Game implements Model {
 
     @Override
     public boolean levelIsOver() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (animals == null || board == null){
+            throw new IllegalStateException("the game was not started yet");
+        }
+        boolean over = true;
+        for (Animal a : animals) {
+            if (a.isOnStar()) {
+                over = over && true;
+            } else {
+                over = false;
+            }
+        }
+        return over;
     }
 
     @Override
     public void move(Position position, Direction direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (animals == null || board == null){
+            throw new IllegalStateException("the game was not started yet");
+        }
+        for (Animal a : animals) {
+            Position new_pos = a.move(board, direction, animals);
+            if (new_pos.equals(position)){
+                a.setPositionOnBoard(new_pos);
+            }
+        }
     }
 
 }

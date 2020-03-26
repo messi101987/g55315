@@ -2,27 +2,46 @@ package g55315.humbug.model;
 
 /**
  * the class game implements the interface Model
+ *
  * @author oscartison
  */
 public class Game implements Model {
-    
+
     /**
-     * this is 
+     * this is the board for the current level
      */
     private Board board;
 
+    /**
+     * this is an array with all the Animals in the board
+     */
     private Animal[] animals;
 
+    /**
+     * a simple getter for the board
+     *
+     * @return the board
+     */
     @Override
     public Board getBoard() {
         return this.board;
     }
 
+    /**
+     * a simple getter for the array of animals
+     *
+     * @return the array of animals
+     */
     @Override
     public Animal[] getAnimals() {
         return this.animals;
     }
 
+    /**
+     * starts the game at a certain level
+     *
+     * @param level the chosen level
+     */
     @Override
     public void startLevel(int level) {
         Animal[] an = {new Snail(new Position(0, 0))};
@@ -32,9 +51,14 @@ public class Game implements Model {
         }
     }
 
+    /**
+     * controls if the level is over or not
+     *
+     * @return true if the level is over, false if not
+     */
     @Override
     public boolean levelIsOver() {
-        if (animals == null || board == null){
+        if (animals == null || board == null) {
             throw new IllegalStateException("the game was not started yet");
         }
         boolean over = true;
@@ -48,15 +72,23 @@ public class Game implements Model {
         return over;
     }
 
+    /**
+     * tries to move the animals in the game
+     *
+     * @param position the position where you want the animal to go
+     * @param direction the direction in which the animal has to move.
+     */
     @Override
     public void move(Position position, Direction direction) {
-        if (animals == null || board == null){
+        if (animals == null || board == null) {
             throw new IllegalStateException("the game was not started yet");
         }
         for (Animal a : animals) {
-            Position new_pos = a.move(board, direction, animals);
-            if (new_pos.equals(position)){
-                a.setPositionOnBoard(new_pos);
+            if (!a.isOnStar()) {
+                Position new_pos = a.move(board, direction, animals);
+                if (new_pos.equals(position)) {
+                    a.setPositionOnBoard(new_pos);
+                }
             }
         }
     }

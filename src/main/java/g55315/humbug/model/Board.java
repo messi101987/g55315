@@ -1,6 +1,5 @@
 package g55315.humbug.model;
 
-import g55315.humbug.view.text.InterfaceView;
 
 /**
  * the board of the game
@@ -42,12 +41,12 @@ public class Board {
         if (pos == null) {
             throw new IllegalArgumentException("null is not a position");
         }
-        boolean inside = true;
         if (pos.getRow() < 0 || pos.getColumn() < 0 || pos.getColumn() >= getNbColumn() || pos.getRow() >= getNbRow()) {
-            inside = false;
+            return false;
         }
-        return inside;
+        return (this.squares[pos.getRow()][pos.getColumn()] != null);
     }
+
 
     /**
      * returns the type of a Square in a given position
@@ -77,6 +76,5 @@ public class Board {
     public int getNbColumn() {
         return this.squares.length;
     }
-
 
 }

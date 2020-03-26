@@ -146,11 +146,11 @@ public class View implements InterfaceView {
     public Direction askDirection() {
         Scanner clavier = new Scanner(System.in);
         System.out.println("Please enter a direction: ");
-        String dir = clavier.next();
+        String dir = clavier.next().toUpperCase();
         Direction d;
         while (!(dir.equals("NORTH") || dir.equals("SOUTH") || dir.equals("EAST") || dir.equals("WEST"))) {
             System.out.println("Wrong direction , please try again ");
-            dir = clavier.next();
+            dir = clavier.next().toUpperCase();
         }
         switch (dir) {
             case "NORTH":

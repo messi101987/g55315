@@ -17,24 +17,25 @@ import g55315.humbug.view.text.View;
  * @author oscartison
  */
 public class Controller {
+
     Model game;
     InterfaceView view;
-    
-    public Controller(Game game, View view){
+
+    public Controller(Game game, View view) {
         this.game = game;
         this.view = view;
     }
-    
-    public void startGame(){
+
+    public void startGame() {
         game.startLevel(1);
-        while(!game.levelIsOver()){
+        while (!game.levelIsOver()) {
             view.displayBoard(game.getBoard(), game.getAnimals());
             Position pos = view.askPosition();
             Direction dir = view.askDirection();
             try {
-                                game.move(pos, dir);
+                game.move(pos, dir);
 
-            } catch(Exception e) {
+            } catch (Exception e) {
                 view.displayError("not moved");
             }
         }

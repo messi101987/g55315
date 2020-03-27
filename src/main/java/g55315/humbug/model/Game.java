@@ -86,9 +86,9 @@ public class Game implements Model {
         for (Animal a : animals) {
             if (!a.isOnStar()) {
                 Position new_pos = a.move(board, direction, animals);
-                if (new_pos.equals(position)) {
-                    a.setPositionOnBoard(new_pos);
-                }
+                if (new_pos == null || !new_pos.equals(position)){
+                    throw new IllegalStateException("move could not be made");
+                } 
             }
         }
     }

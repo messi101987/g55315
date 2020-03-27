@@ -104,7 +104,7 @@ public class View implements InterfaceView {
      */
     @Override
     public void displayError(String message) {
-        System.out.println("message");
+        System.out.println(message);
     }
 
     /**

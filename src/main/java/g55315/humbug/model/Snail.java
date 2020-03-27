@@ -43,9 +43,7 @@ public class Snail extends Animal {
 
     @Override
     public String toString() {
-        return "@"; //To change body of generated methods, choose Tools | Templates.
+        return "@"; 
     }
-    
-    
 
 }

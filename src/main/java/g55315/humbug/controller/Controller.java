@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.controller;
 
 import g55315.humbug.model.Direction;
@@ -21,14 +16,24 @@ public class Controller {
     Model game;
     InterfaceView view;
 
+    /**
+     * constructor of the game
+     *
+     * @param game the game created you want to use
+     * @param view the view you want to use
+     */
     public Controller(Game game, View view) {
         this.game = game;
         this.view = view;
     }
 
+    /**
+     * starts the game by initializing it on level 1, and starts a game loop
+     */
     public void startGame() {
         game.startLevel(1);
-        while (!game.levelIsOver()) {
+        boolean fell = false;
+        while (!game.levelIsOver() && !fell) {
             view.displayBoard(game.getBoard(), game.getAnimals());
             Position pos = view.askPosition();
             Direction dir = view.askDirection();
@@ -36,7 +41,8 @@ public class Controller {
                 game.move(pos, dir);
 
             } catch (Exception e) {
-                view.displayError("not moved");
+                view.displayError("animal fell of the board");
+                fell = true;
             }
         }
     }

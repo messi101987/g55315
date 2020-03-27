@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.main;
 
 import g55315.humbug.controller.Controller;
@@ -10,7 +5,8 @@ import g55315.humbug.model.Game;
 import g55315.humbug.view.text.View;
 
 /**
- *
+ * the main method of the whole game, it creates a new controller with a Game and
+ * View for the game, and then starts the game.
  * @author oscartison
  */
 public class Main {

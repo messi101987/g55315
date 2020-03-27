@@ -36,6 +36,11 @@ public class Controller {
         while (!game.levelIsOver() && !fell) {
             view.displayBoard(game.getBoard(), game.getAnimals());
             Position pos = view.askPosition();
+            while(!game.isAnimalPos(pos)){
+                view.displayError("there is no animal at this position, try again");
+                pos = view.askPosition();
+            }
+
             Direction dir = view.askDirection();
             try {
                 game.move(pos, dir);

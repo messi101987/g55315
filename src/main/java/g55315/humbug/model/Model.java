@@ -14,6 +14,7 @@ public interface Model {
     Animal[] getAnimals();
     void startLevel(int level);
     boolean levelIsOver();
+    boolean isAnimalPos(Position pos);
     void move(Position position, Direction direction);
     
 }

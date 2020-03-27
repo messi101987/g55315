@@ -58,7 +58,7 @@ public class View implements InterfaceView {
                     }
                     if (x == 1) {
                         for (Animal a : animals) {
-                            if (a.getPositionOnBoard().equals(new Position(i, j))) {
+                            if (a.getPositionOnBoard().equals(new Position(i, j)) && !a.isOnStar()) {
                                 star = a.toString();
                             }
                         }
@@ -132,8 +132,8 @@ public class View implements InterfaceView {
      */
     @Override
     public Position askPosition() {
-        int pos_x = readInt("please enter a x position ");
-        int pos_y = readInt("Please enter an y position ");
+        int pos_x = readInt("please enter a row position ");
+        int pos_y = readInt("Please enter an column position ");
         return new Position(pos_x, pos_y);
     }
 

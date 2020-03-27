@@ -73,22 +73,41 @@ public class Game implements Model {
     }
 
     /**
+     * checks if there is an animal at a certain position
+     *
+     * @param pos the position where we check if there is an animal
+     * @return true if there is an animal at this position, false if not
+     */
+    @Override
+    public boolean isAnimalPos(Position pos) {
+        boolean animal_present = false;
+        for (Animal a : animals) {
+            if (a.getPositionOnBoard().equals(pos)) {
+                animal_present = true;
+            }
+        }
+        return animal_present;
+    }
+
+    /**
      * tries to move the animals in the game
      *
      * @param position the position where you want the animal to go
      * @param direction the direction in which the animal has to move.
      */
     @Override
-    public void move(Position position, Direction direction) {
+    public void move(Position position, Direction direction
+    ) {
         if (animals == null || board == null) {
             throw new IllegalStateException("the game was not started yet");
         }
         for (Animal a : animals) {
-            if (!a.isOnStar()) {
+            if (a.getPositionOnBoard().equals(position) && !a.isOnStar()) {
                 Position new_pos = a.move(board, direction, animals);
-                if (new_pos == null || !new_pos.equals(position)){
+                if (new_pos == null) {
                     throw new IllegalStateException("move could not be made");
-                } 
+                }
+
             }
         }
     }

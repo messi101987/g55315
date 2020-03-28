@@ -1,4 +1,4 @@
-package g55315.humbug.main;
+package g55315.humbug;
 
 import g55315.humbug.controller.Controller;
 import g55315.humbug.model.Game;

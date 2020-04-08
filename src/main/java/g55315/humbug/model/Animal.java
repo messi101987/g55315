@@ -70,6 +70,7 @@ public abstract class Animal {
             if (a.getPositionOnBoard().equals(pos.next(direction))) {
                 move = false;
             } else {
+                // APA : le else n'est pas nécessaire
                 move = move && true;
             }
         }

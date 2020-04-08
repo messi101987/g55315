@@ -69,6 +69,7 @@ public class Board {
      *
      * @return
      */
+    // APA : Ce sont les colonnes [0]
     public int getNbRow() {
         return this.squares[0].length;
     }

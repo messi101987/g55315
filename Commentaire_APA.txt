@@ -1,0 +1,32 @@
+Itération 1
+-----------------
+
+Un message pour indiquer la fin du jeu serait bien.
+
+Board.java: Par convention, squares.length représente le nombre de lignes et squares[0].length le nombre de colonne
+
+Animal.java : la méthode isNextFree devrait faire partie de la classe Board plutot que Animal.
+
+Commentaire Interface ? C'est très important de commenter des interfaces car ils servent de contrat entre plusieurs parties du programme. Les équipes de développement vont généralement regarder l'interface, et pas son implémentation. Ce qui les intéresse c'est le nom des méthodes qui vont être implémentée et non ce qu'elles font. Il faut donc bien commenter les interfaces (sinon ils sont illisibles étant donnée qu'il n'y a pas de code).
+
+--------------
+for (Animal a : animals) {
+            if (a.isOnStar()) {
+                over = over && true;
+            } else {
+                over = false;
+            }
+        }
+
+Ceci est équivalent à
+
+for (Animal a : animals) {
+            if (!a.isOnStar()) {
+                over = false;
+            }
+        }
+qui est plus court et plus compréhensible
+
+-------------------------------
+
+Game.java : move : Ce n'est pas une exception de tomber du plateau de jeu, cela fait partie des règles de perdre! Les exceptions ne sont la que pour gérer... les exceptions! C'est à dire, des paramètres qui seraient mauvais (null, ou dans un état étrange (pos en dehors,...)) et si l'utilisateur entre des données erronées. Les exceptions sont la pour gérer les cas d'erreur et que le programme continue de fonctionner malgré tout. Perdre le jeu n'en est pas une ;). 

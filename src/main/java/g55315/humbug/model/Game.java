@@ -62,8 +62,10 @@ public class Game implements Model {
             throw new IllegalStateException("the game was not started yet");
         }
         boolean over = true;
+        // APA : Et si l'animal est tombé ? 
         for (Animal a : animals) {
             if (a.isOnStar()) {
+                // APA : Tu n'as besoin que du else
                 over = over && true;
             } else {
                 over = false;
@@ -105,6 +107,7 @@ public class Game implements Model {
             if (a.getPositionOnBoard().equals(position) && !a.isOnStar()) {
                 Position new_pos = a.move(board, direction, animals);
                 if (new_pos == null) {
+                    // APA : Ce n'est pas une exception de tomber.
                     throw new IllegalStateException("move could not be made");
                 }
 

@@ -8,6 +8,7 @@ public class Snail extends Animal {
 
     /**
      * a constructor for the class snail
+     *
      * @param pos the position on which the snail is created
      */
     public Snail(Position pos) {
@@ -29,12 +30,14 @@ public class Snail extends Animal {
             if (isNextFree(pos, direction, animals)) {
                 pos = this.getPositionOnBoard().next(direction);
                 this.setPositionOnBoard(pos);
+                // APA : **LA**
             }
         } else {
             pos = null;
             this.setPositionOnBoard(null);
         }
         if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
+            // APA : Pourquoi ne pas faire ça la **LA**
             this.setOnStar(true);
             board.setSquareGrass(pos);
         }
@@ -43,7 +46,7 @@ public class Snail extends Animal {
 
     @Override
     public String toString() {
-        return "@"; 
+        return "@";
     }
 
 }

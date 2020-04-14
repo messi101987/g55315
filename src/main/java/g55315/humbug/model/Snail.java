@@ -27,20 +27,19 @@ public class Snail extends Animal {
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
         if (board.isInside(pos.next(direction))) {
-            if (isNextFree(pos, direction, animals)) {
+            if (board.isNextFree(pos, direction, animals)) {
                 pos = this.getPositionOnBoard().next(direction);
                 this.setPositionOnBoard(pos);
-                // APA : **LA**
+                if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
+                    this.setOnStar(true);
+                    board.setSquareGrass(pos);
+                }
             }
         } else {
             pos = null;
             this.setPositionOnBoard(null);
         }
-        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
-            // APA : Pourquoi ne pas faire ça la **LA**
-            this.setOnStar(true);
-            board.setSquareGrass(pos);
-        }
+
         return pos;
     }
 

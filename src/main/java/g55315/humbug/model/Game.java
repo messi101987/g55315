@@ -62,16 +62,16 @@ public class Game implements Model {
             throw new IllegalStateException("the game was not started yet");
         }
         boolean over = true;
-        // APA : Et si l'animal est tombé ? 
+        boolean felt = false;
         for (Animal a : animals) {
-            if (a.isOnStar()) {
-                // APA : Tu n'as besoin que du else
-                over = over && true;
-            } else {
+            if (!a.isOnStar()) {
                 over = false;
             }
+            if(a.getPositionOnBoard() == null){
+                felt = true;
+            }
         }
-        return over;
+        return over || felt;
     }
 
     /**
@@ -106,11 +106,6 @@ public class Game implements Model {
         for (Animal a : animals) {
             if (a.getPositionOnBoard().equals(position) && !a.isOnStar()) {
                 Position new_pos = a.move(board, direction, animals);
-                if (new_pos == null) {
-                    // APA : Ce n'est pas une exception de tomber.
-                    throw new IllegalStateException("move could not be made");
-                }
-
             }
         }
     }

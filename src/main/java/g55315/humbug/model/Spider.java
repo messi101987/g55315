@@ -26,7 +26,7 @@ public class Spider extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
-        while (pos != null && isNextFree(pos, direction, animals)) {
+        while (pos != null && board.isNextFree(pos, direction, animals)) {
             pos = pos.next(direction);
             if (!board.isInside(pos)) {
                 pos = null;

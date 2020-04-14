@@ -32,23 +32,24 @@ public class Controller {
      */
     public void startGame() {
         game.startLevel(1);
-        boolean fell = false;
-        while (!game.levelIsOver() && !fell) {
+        while (!game.levelIsOver()) {
             view.displayBoard(game.getBoard(), game.getAnimals());
             Position pos = view.askPosition();
-            while(!game.isAnimalPos(pos)){
+            while (!game.isAnimalPos(pos)) {
                 view.displayError("there is no animal at this position, try again");
                 pos = view.askPosition();
             }
-
             Direction dir = view.askDirection();
+
             try {
                 game.move(pos, dir);
+                if(game.isAnimalPos(null)){
+                }
 
             } catch (Exception e) {
                 view.displayError("animal fell of the board");
-                fell = true;
             }
         }
+        view.displayError("You've won!");
     }
 }

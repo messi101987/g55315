@@ -56,27 +56,7 @@ public abstract class Animal {
         this.onStar = onStar;
     }
 
-    /**
-     * checks if the next position of an animal is free
-     *
-     * @param pos the current position of the animal.
-     * @param direction the direction in which the animal will try to move
-     * @param animals an array of the other animals on the board
-     * @return true if the next position is free, false otherwise
-     */
-    public boolean isNextFree(Position pos, Direction direction, Animal... animals) {
-        boolean move = true;
-        for (Animal a : animals) {
-            if (a.getPositionOnBoard().equals(pos.next(direction))) {
-                move = false;
-            } else {
-                // APA : le else n'est pas nécessaire
-                move = move && true;
-            }
-        }
-        return move;
-    }
-
+   
     public abstract Position move(Board board, Direction direction, Animal... animals);
 
 }

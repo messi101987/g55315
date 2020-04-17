@@ -1,6 +1,5 @@
 package g55315.humbug.model;
 
-
 /**
  * the board of the game
  *
@@ -47,7 +46,7 @@ public class Board {
         return (this.squares[pos.getRow()][pos.getColumn()] != null);
     }
 
-     /**
+    /**
      * checks if the next position of an animal is free
      *
      * @param pos the current position of the animal.
@@ -65,6 +64,42 @@ public class Board {
         return move;
     }
 
+    /**
+     * checks if the next position is in the board
+     *
+     * @param pos the current position
+     * @param dir the direction in which the animal tries to move
+     * @return true if the next position is in the board, false if not.
+     */
+    boolean isNextInBoard(Position pos, Direction dir) {
+        return isInside(pos.next(dir));
+    }
+
+    /**
+     * checks if there is a wall in a certain direction
+     *
+     * @param pos the position that needs to be checked
+     * @param dir the direction in which we have to check for a wall.
+     * @return true if there is a wall in that direction, false otherwhise
+     */
+    public boolean isNextWall(Position pos, Direction dir) {
+        return (squares[pos.getRow()][pos.getColumn()].hasWall(dir))
+                || (isNextInBoard(pos, dir)
+                && squares[pos.next(dir).getRow()][pos.next(dir).getColumn()].hasWall(dir.opposite()));
+    }
+    
+    
+    /**
+     * checks if a square at a position has a wall in a certain direction
+     * @param pos the position of the square we want to check
+     * @param dir the direction in which we want to check
+     * @return true if there is a wall in that direction, false if not
+     */
+    public boolean hasSquareWallDirection(Position pos,Direction dir) {
+        return squares[pos.getRow()][pos.getColumn()].hasWall(dir);
+    }
+    
+    
 
     /**
      * returns the type of a Square in a given position
@@ -87,7 +122,6 @@ public class Board {
      *
      * @return
      */
-
     public int getNbRow() {
         return this.squares.length;
     }

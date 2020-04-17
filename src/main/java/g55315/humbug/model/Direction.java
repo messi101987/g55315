@@ -40,4 +40,26 @@ public enum Direction {
         return deltaRow;
     }
 
+    /**
+     * gives the opposite direction
+     * @return the opposite of the current direction
+     */
+    public Direction opposite() {
+        Direction d;
+        switch (this) {
+            case NORTH:
+                d = SOUTH;
+                break;
+            case SOUTH:
+                d = NORTH;
+                break;
+            case EAST:
+                d = WEST;
+                break;
+            default:
+                d = EAST;
+        }
+        return d;
+    }
+
 }

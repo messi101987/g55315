@@ -143,6 +143,25 @@ public class SpiderTest {
         assertTrue(animals[0].isOnStar());
         assertEquals(GRASS, board.getSquareType(result));
     }
+    
+     @Test
+    public void testMove_wall() {
+        System.out.println("move, and go to a wall");
+        Square sq = new Square(GRASS);
+        sq.setEastWall(true);
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), sq, new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS), null},
+            {null, null, new Square(STAR), null}
+        });
+        animals = new Animal[] {
+            new Spider(new Position(0, 0))
+        };
+        Spider instance = (Spider) animals[0];
+        Position expResult = new Position(0, 2);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
 
 
     

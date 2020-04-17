@@ -4,7 +4,9 @@ import g55315.humbug.model.Animal;
 import g55315.humbug.model.Board;
 import g55315.humbug.model.Direction;
 import g55315.humbug.model.Position;
+import g55315.humbug.model.Snail;
 import g55315.humbug.model.SquareType;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -15,28 +17,67 @@ public class View implements InterfaceView {
 
     /**
      * makes a 2D array of Strings of the game board
-     * @param board the board that needs to  be changed in an array
+     *
+     * @param board the board that needs to be changed in an array
      * @return the 2d array of Strings
      */
-    public static String[][] makeStringBoard(Board board){
-        String[][] boardString = new String[board.getNbRow()][board.getNbColumn()];
+    public static String[][] makeStringBoard(Board board, Animal... animals) {
+        String[][] boardString = new String[4 * board.getNbRow() + 1][4 * board.getNbColumn() + 1];
+        for (String[] boardString1 : boardString) {
+            for (int j = 0; j < boardString[0].length; j++) {
+                boardString1[j] = " ";
+            }
+        }
         for (int i = 0; i < board.getNbRow(); i++) {
             for (int j = 0; j < board.getNbColumn(); j++) {
                 Position pos = new Position(i, j);
                 if (board.isInside(pos)) {
-                    if (board.getSquareType(pos) == SquareType.GRASS) {
-                        boardString[i][j] = "grass";
-                    } else if (board.getSquareType(pos) == SquareType.STAR) {
-                        boardString[i][j] = "star";
-
+                    int pos_col = j * 4;
+                    int pos_row = i * 4;
+                    for (int x = 0; x < 5; x++) {
+                        boardString[pos_row][pos_col + x] = "\033[42;38;1m_\033[0m";
                     }
-                } else {
-                    boardString[i][j] = "null";
+                    pos_row++;
+                    for (int y = 0; y < 3; y++) {
+                        for (int x = 0; x < 5; x++) {
+                            if ((pos_col + x) % 4 == 0) {
+                                boardString[pos_row][pos_col + x] = "\033[42;38;1m|\033[0m";
+                            } else {
+                                boardString[pos_row][pos_col + x] = "\033[42;38;1m \033[0m";
+                            }
+                        }
+                        pos_row++;
+                    }
+                    for (int x = 0; x < 5; x++) {
+                        boardString[pos_row][pos_col + x] = "\033[42;38;1m_\033[0m";
+                    }
+                    for (Animal a : animals) {
+                        if (a.getPositionOnBoard().equals(pos) && !a.isOnStar()) {
+                            boardString[pos_col + 2][pos_col + 2] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                        }
+                    }
+                    if (board.getSquareType(pos) == SquareType.STAR) {
+                        boardString[pos_col + 2][pos_col + 2] = "\033[42;38;1m\033[31m*\033[30m\033[0m";
+                    }
+                    
+                    if(board.hasSquareWallDirection(pos, Direction.NORTH)){
+                        boardString[pos_col + 1][pos_col + 2] = "\033[41;38;1m \033[0m";
+                    } 
+                    if (board.hasSquareWallDirection(pos, Direction.SOUTH)){
+                        boardString[pos_col + 3][pos_col + 2] = "\033[41;38;1m \033[0m";
+                    } 
+                    if (board.hasSquareWallDirection(pos, Direction.WEST)){
+                        boardString[pos_col + 2][pos_col + 1] = "\033[41;38;1m \033[0m";
+                    } 
+                    if (board.hasSquareWallDirection(pos, Direction.EAST)){
+                        boardString[pos_col + 2][pos_col + 3] = "\033[41;38;1m \033[0m";
+                    }
                 }
             }
         }
         return boardString;
     }
+
     /**
      * prints the content of a Board
      *
@@ -45,57 +86,14 @@ public class View implements InterfaceView {
      */
     @Override
     public void displayBoard(Board board, Animal... animals) {
-        String[][] boardString = makeStringBoard(board);
-        for (int i = 0; i < board.getNbRow(); i++) {
-            for (int x = 0; x < 5; x++) {
-                for (int j = 0; j < board.getNbColumn(); j++) {
-                    String star;
-
-                    if (boardString[i][j].equals("star") && x == 1) {
-                        star = "\033[31m*\033[30m";
-                    } else {
-                        star = " ";
-                    }
-                    if (x == 1) {
-                        for (Animal a : animals) {
-                            if (a.getPositionOnBoard().equals(new Position(i, j)) && !a.isOnStar()) {
-                                star = a.toString();
-                            }
-                        }
-                    }
-
-                    if (x == 4 || (x == 0 && i == 0)) {
-                        if (i == board.getNbRow() - 1) {
-                            if (!boardString[i][j].equals("null")) {
-                                System.out.print("\033[42;38;1m------\033[0m");
-                            } else {
-                                System.out.print("      ");
-                            }
-                        } else if (!boardString[i][j].equals("null") || (x == 4 && !boardString[i + 1][j].equals("null"))) {
-                            System.out.print("\033[42;38;1m------\033[0m");
-
-                        } else {
-                            System.out.print("      ");
-                        }
-                    } else {
-                        if (!boardString[i][j].equals("null")) {
-                            if (j != 0 && !boardString[i][j - 1].equals("null")) {
-                                System.out.print("\033[42;38;1m " + star + "  |\033[0m");
-                            } else {
-                                System.out.print("\033[42;38;1m|  " + star + " |\033[0m");
-                            }
-
-                        } else {
-                            System.out.print("      ");
-                        }
-
-                    }
-                }
-                System.out.println("");
+        String[][] boardString = makeStringBoard(board, animals);
+        for (int i = 0; i < boardString.length; i++) {
+            for (int j = 0; j < boardString[0].length; j++) {
+                System.out.print(boardString[i][j]);
             }
+            System.out.println("");
         }
     }
-   
 
     /**
      * displays an error message

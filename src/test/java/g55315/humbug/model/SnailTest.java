@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * @author Pierre Bettens (pbt) <pbettens@he2b.be>
  */
 public class SnailTest {
-    
+
     private Board board;
     private Animal[] animals;
 
@@ -24,7 +24,7 @@ public class SnailTest {
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
-        animals = new Animal[] {
+        animals = new Animal[]{
             new Snail(new Position(0, 0)),
             new Snail(new Position(1, 2))
         };
@@ -55,8 +55,6 @@ public class SnailTest {
         assertEquals(expResult, result);
     }
 
-  
-    
     /**
      * Test of move method, of class Snail.
      */
@@ -83,8 +81,7 @@ public class SnailTest {
         assertEquals(expResult, result);
     }
 
-    
-     @Test
+    @Test
     public void testMove_wall() {
         System.out.println("move, and go to a wall");
         Square sq = new Square(GRASS);
@@ -94,7 +91,7 @@ public class SnailTest {
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}
         });
-        animals = new Animal[] {
+        animals = new Animal[]{
             new Snail(new Position(0, 0))
         };
         Snail instance = (Snail) animals[0];
@@ -102,6 +99,24 @@ public class SnailTest {
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
-    
-}
 
+    @Test
+    public void testMove_wall_same() {
+        System.out.println("move, and go to a wall on same square");
+        Square sq = new Square(GRASS);
+        sq.setEastWall(true);
+        board = new Board(new Square[][]{
+            {sq, new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS), null},
+            {null, null, new Square(STAR), null}
+        });
+        animals = new Animal[]{
+            new Snail(new Position(0, 0))
+        };
+        Snail instance = (Snail) animals[0];
+        Position expResult = new Position(0, 0);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
+
+}

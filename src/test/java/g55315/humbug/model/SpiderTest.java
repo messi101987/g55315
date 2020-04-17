@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 //import static org.junit.jupiter.api.Assertions.*;
-
 /**
  *
  * @author Pierre Bettens (pbt) <pbettens@he2b.be>
@@ -19,7 +18,7 @@ public class SpiderTest {
 
     private Board board;
     private Animal[] animals;
-    
+
     @BeforeEach
     public void setUp() {
         board = new Board(new Square[][]{
@@ -27,7 +26,7 @@ public class SpiderTest {
             {null, new Square(GRASS), new Square(GRASS)},
             {null, null, new Square(STAR)}
         });
-        animals = new Animal[] {
+        animals = new Animal[]{
             new Spider(new Position(0, 0)),
             new Snail(new Position(1, 2))
         };
@@ -75,10 +74,11 @@ public class SpiderTest {
         });
         animals[1] = new Snail(new Position(0, 2));
         Spider instance = (Spider) animals[0];
-        Position expResult = new Position(0,1);
+        Position expResult = new Position(0, 1);
         Position result = instance.move(board, Direction.EAST, animals);
         assertEquals(expResult, result);
     }
+
     /**
      * Test of move method, of class Snail.
      */
@@ -112,7 +112,7 @@ public class SpiderTest {
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}
         });
-        animals = new Animal[] {
+        animals = new Animal[]{
             new Spider(new Position(0, 0)),
             new Snail(new Position(0, 3))
         };
@@ -132,7 +132,7 @@ public class SpiderTest {
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}
         });
-        animals = new Animal[] {
+        animals = new Animal[]{
             new Spider(new Position(0, 0)),
             new Snail(new Position(0, 3))
         };
@@ -143,8 +143,8 @@ public class SpiderTest {
         assertTrue(animals[0].isOnStar());
         assertEquals(GRASS, board.getSquareType(result));
     }
-    
-     @Test
+
+    @Test
     public void testMove_wall() {
         System.out.println("move, and go to a wall");
         Square sq = new Square(GRASS);
@@ -154,7 +154,7 @@ public class SpiderTest {
             {null, new Square(GRASS), new Square(GRASS), null},
             {null, null, new Square(STAR), null}
         });
-        animals = new Animal[] {
+        animals = new Animal[]{
             new Spider(new Position(0, 0))
         };
         Spider instance = (Spider) animals[0];
@@ -163,6 +163,23 @@ public class SpiderTest {
         assertEquals(expResult, result);
     }
 
+    @Test
+    public void testMove_wall_same() {
+        System.out.println("move, and go to a wall on the west side");
+        Square sq = new Square(GRASS);
+        sq.setWestWall(true);
+        board = new Board(new Square[][]{
+            {new Square(GRASS), new Square(GRASS), sq, new Square(GRASS)},
+            {null, new Square(GRASS), new Square(GRASS), null},
+            {null, null, new Square(STAR), null}
+        });
+        animals = new Animal[]{
+            new Spider(new Position(0, 0))
+        };
+        Spider instance = (Spider) animals[0];
+        Position expResult = new Position(0, 1);
+        Position result = instance.move(board, Direction.EAST, animals);
+        assertEquals(expResult, result);
+    }
 
-    
 }

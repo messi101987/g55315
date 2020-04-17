@@ -99,7 +99,6 @@ public class Board {
         return squares[pos.getRow()][pos.getColumn()].hasWall(dir);
     }
     
-    
 
     /**
      * returns the type of a Square in a given position

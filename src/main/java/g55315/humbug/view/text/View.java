@@ -35,7 +35,7 @@ public class View implements InterfaceView {
                     int pos_col = j * 4;
                     int pos_row = i * 4;
                     for (int x = 0; x < 5; x++) {
-                        boardString[pos_row][pos_col + x] = "\033[42;38;1m_\033[0m";
+                        boardString[pos_row][pos_col + x] = "\033[42;38;1m-\033[0m";
                     }
                     pos_row++;
                     for (int y = 0; y < 3; y++) {
@@ -49,7 +49,7 @@ public class View implements InterfaceView {
                         pos_row++;
                     }
                     for (int x = 0; x < 5; x++) {
-                        boardString[pos_row][pos_col + x] = "\033[42;38;1m_\033[0m";
+                        boardString[pos_row][pos_col + x] = "\033[42;38;1m-\033[0m";
                     }
                     for (Animal a : animals) {
                         if (a.getPositionOnBoard().equals(pos) && !a.isOnStar()) {

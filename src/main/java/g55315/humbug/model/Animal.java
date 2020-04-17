@@ -58,5 +58,20 @@ public abstract class Animal {
 
    
     public abstract Position move(Board board, Direction direction, Animal... animals);
+    
+    protected Position moveOneJumping(Board board, Direction direction, Animal... animals){
+        Position pos = this.getPositionOnBoard();
+            if (board.isNextFree(pos, direction, animals)) {
+                this.setPositionOnBoard(pos.next(direction));
+        } else {
+                this.setPositionOnBoard(pos.next(direction));
+                moveOneJumping(board, direction, animals);
+            }
+         return pos;
+    }
+    
+    protected Position moveOneCrawling (Board board, Direction direction, Animal... animals){
+        return new Position(0, 0);
+    }
 
 }

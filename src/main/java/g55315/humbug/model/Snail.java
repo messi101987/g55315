@@ -25,19 +25,10 @@ public class Snail extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position pos = this.getPositionOnBoard();
-        if (board.isInside(pos.next(direction))) {
-            if (board.isNextFree(pos, direction, animals) && !(board.isNextWall(pos, direction))) {
-                pos = this.getPositionOnBoard().next(direction);
-                this.setPositionOnBoard(pos);
-                if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
-                    this.setOnStar(true);
-                    board.setSquareGrass(pos);
-                }
-            }
-        } else {
-            pos = null;
-            this.setPositionOnBoard(null);
+        Position pos = moveOneCrawling(board, direction, animals);
+        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
+            this.setOnStar(true);
+            board.setSquareGrass(pos);
         }
 
         return pos;

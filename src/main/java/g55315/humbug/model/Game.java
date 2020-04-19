@@ -44,7 +44,8 @@ public class Game implements Model {
      */
     @Override
     public void startLevel(int level) {
-        Animal[] an = {new Snail(new Position(0, 0))};
+        Animal[] an = {new Ladybird(new Position(0, 1)), new Grasshopper(new Position(0, 0))
+        };
         if (level == 1) {
             this.board = Board.getInitialBoard();
             this.animals = an;

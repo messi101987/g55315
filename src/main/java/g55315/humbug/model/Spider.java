@@ -27,10 +27,7 @@ public class Spider extends Animal {
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
         while (pos != null && board.isNextFree(pos, direction, animals) && !(board.isNextWall(pos, direction))) {
-            pos = pos.next(direction);
-            if (!board.isInside(pos)) {
-                pos = null;
-            }
+            pos = moveOneCrawling(board, direction, animals);
         }
 
         this.setPositionOnBoard(pos);

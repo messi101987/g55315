@@ -19,6 +19,7 @@ public class View implements InterfaceView {
      * makes a 2D array of Strings of the game board
      *
      * @param board the board that needs to be changed in an array
+     * @param animals the animals on the board
      * @return the 2d array of Strings
      */
     public static String[][] makeStringBoard(Board board, Animal... animals) {
@@ -53,24 +54,24 @@ public class View implements InterfaceView {
                     }
                     for (Animal a : animals) {
                         if (a.getPositionOnBoard().equals(pos) && !a.isOnStar()) {
-                            boardString[pos_col + 2][pos_col + 2] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                            boardString[i * 4 + 2][j * 4 + 2] = "\033[42;38;1m" + a.toString() + "\033[0m";
                         }
                     }
                     if (board.getSquareType(pos) == SquareType.STAR) {
-                        boardString[pos_col + 2][pos_col + 2] = "\033[42;38;1m\033[31m*\033[30m\033[0m";
+                        boardString[i * 4 + 2][j * 4 + 2] = "\033[42;38;1m\033[31m*\033[30m\033[0m";
                     }
                     
                     if(board.hasSquareWallDirection(pos, Direction.NORTH)){
-                        boardString[pos_col + 1][pos_col + 2] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 1][j * 4 + 2] = "\033[41;38;1m \033[0m";
                     } 
                     if (board.hasSquareWallDirection(pos, Direction.SOUTH)){
-                        boardString[pos_col + 3][pos_col + 2] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 3][j * 4 + 2] = "\033[41;38;1m \033[0m";
                     } 
                     if (board.hasSquareWallDirection(pos, Direction.WEST)){
-                        boardString[pos_col + 2][pos_col + 1] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 2][j * 4 + 1] = "\033[41;38;1m \033[0m";
                     } 
                     if (board.hasSquareWallDirection(pos, Direction.EAST)){
-                        boardString[pos_col + 2][pos_col + 3] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 2][j * 4 + 3] = "\033[41;38;1m \033[0m";
                     }
                 }
             }

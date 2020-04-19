@@ -56,22 +56,32 @@ public abstract class Animal {
         this.onStar = onStar;
     }
 
-   
     public abstract Position move(Board board, Direction direction, Animal... animals);
-    
-    protected Position moveOneJumping(Board board, Direction direction, Animal... animals){
+
+    protected Position moveOneJumping(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
-            if (board.isNextFree(pos, direction, animals)) {
-                this.setPositionOnBoard(pos.next(direction));
+        if (board.isNextFree(pos, direction, animals)) {
+            this.setPositionOnBoard(pos.next(direction));
         } else {
-                this.setPositionOnBoard(pos.next(direction));
-                moveOneJumping(board, direction, animals);
-            }
-         return pos;
+            this.setPositionOnBoard(pos.next(direction));
+            moveOneJumping(board, direction, animals);
+        }
+        return pos;
     }
-    
-    protected Position moveOneCrawling (Board board, Direction direction, Animal... animals){
-        return new Position(0, 0);
+
+    protected Position moveOneCrawling(Board board, Direction direction, Animal... animals) {
+        Position pos = this.getPositionOnBoard();
+        if (board.isInside(pos.next(direction))) {
+            if (board.isNextFree(pos, direction, animals) && !(board.isNextWall(pos, direction))) {
+                pos = this.getPositionOnBoard().next(direction);
+                this.setPositionOnBoard(pos);
+            }
+        } else {
+            pos = null;
+            this.setPositionOnBoard(null);
+        }
+
+        return pos;
     }
 
 }

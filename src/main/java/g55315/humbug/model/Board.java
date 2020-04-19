@@ -24,7 +24,9 @@ public class Board {
      * @return the new board
      */
     public static Board getInitialBoard() {
-        Square[][] tab = {{new Square(SquareType.GRASS), new Square(SquareType.GRASS), null},
+        Square s = new Square(SquareType.GRASS);
+        s.setWestWall(true);
+        Square[][] tab = {{new Square(SquareType.GRASS), new Square(SquareType.GRASS), s},
         {null, new Square(SquareType.GRASS), new Square(SquareType.GRASS)},
         {null, null, new Square(SquareType.STAR)}};
         return new Board(tab);

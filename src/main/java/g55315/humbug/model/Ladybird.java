@@ -9,26 +9,29 @@ package g55315.humbug.model;
  *
  * @author oscartison
  */
-public class Grasshopper extends Animal {
+public class Ladybird extends Animal {
 
-    
-    public Grasshopper(Position pos){
+    public Ladybird(Position pos) {
         super(pos);
     }
-    
+
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position pos = moveOneJumping(board, direction, animals);
+        Position pos = this.getPositionOnBoard();
+        for (int i = 0; i < 2; i++) {
+            pos = moveOneCrawling(board, direction, animals);
+        }
+        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
+            this.setOnStar(true);
+            board.setSquareGrass(pos);
+        }
+
         return pos;
     }
 
-    
     @Override
     public String toString() {
-        return "G";
+        return "Q";
     }
-    
-    
-    
-    
+
 }

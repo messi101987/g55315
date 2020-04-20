@@ -26,6 +26,12 @@ public interface Model {
     Animal[] getAnimals();
 
     /**
+     * a getter for the remaining moves of the level
+     * @return the remaining moves
+     */
+    int getRemainingMoves();
+    
+    /**
      * starts the game at a certain level
      *
      * @param level the chosen level
@@ -33,11 +39,10 @@ public interface Model {
     void startLevel(int level);
 
     /**
-     * controls if the level is over or not
-     *
-     * @return true if the level is over, false if not
+     * gets the status of the level
+     * @return the status in which the level is currently is.
      */
-    boolean levelIsOver();
+    LevelStatus getLevelStatus();
 
     /**
      * checks if there is an animal at a certain position
@@ -54,5 +59,10 @@ public interface Model {
      * @param direction the direction in which the animal has to move.
      */
     void move(Position position, Direction direction);
+    
+    /**
+     * decrements the remaining moves
+     */
+    void decrRemainingMoves();
 
 }

@@ -9,44 +9,44 @@ package g55315.humbug.model;
  *
  * @author oscartison
  */
-public class Ladybird extends Animal {
+public class Butterfly extends Animal {
 
     /**
-     * the constructor for the ladybird
+     * the constructor for the butterfly
      * @param pos the position in which the ladybird is created
      */
-    public Ladybird(Position pos) {
+    public Butterfly(Position pos) {
         super(pos);
     }
 
     /**
-     * moves the ladybird 2 squares and stops before if there is an obstacle
-     * @param board the board on which the ladybird is 
+     * moves the butterfly 2 squares and stops before if there is an obstacle
+     * @param board the board on which the butterfly is 
      * @param direction the direction in which it will move
      * @param animals the animals on the board.
      * @return the new position of the ladybird
      */
-    @Override
+       @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
-        for (int i = 0; i < 2; i++) {
-            pos = moveOneCrawling(board, direction, animals);
-        }
+        pos = pos.next(direction).next(direction);
+        this.setPositionOnBoard(pos);
+        pos = moveOneFlying(board, direction, animals);
         if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
             this.setOnStar(true);
             board.setSquareGrass(pos);
         }
-
         return pos;
     }
 
     /**
-     * returns the string that will be printed on the board
-     * @return the string that will be printed on the board
+     * 
+     * @return the string printed on the board
      */
     @Override
     public String toString() {
-        return "Q";
+        return "8";
     }
 
 }
+   

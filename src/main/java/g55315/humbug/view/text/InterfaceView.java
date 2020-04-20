@@ -3,6 +3,7 @@ package g55315.humbug.view.text;
 import g55315.humbug.model.Animal;
 import g55315.humbug.model.Board;
 import g55315.humbug.model.Direction;
+import g55315.humbug.model.Game;
 import g55315.humbug.model.Position;
 
 /**
@@ -40,4 +41,9 @@ public interface InterfaceView {
      */
     void displayError(String message);
 
+    /**
+     * displays the remaining moves.
+     * @param game the game that is currently played
+     */
+    void displayRemainingMoves(Game game);
 }

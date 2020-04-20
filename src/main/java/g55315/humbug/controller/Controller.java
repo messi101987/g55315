@@ -2,6 +2,7 @@ package g55315.humbug.controller;
 
 import g55315.humbug.model.Direction;
 import g55315.humbug.model.Game;
+import g55315.humbug.model.LevelStatus;
 import g55315.humbug.model.Model;
 import g55315.humbug.model.Position;
 import g55315.humbug.view.text.InterfaceView;
@@ -29,10 +30,12 @@ public class Controller {
 
     /**
      * starts the game by initializing it on level 1, and starts a game loop
+     * @param nLevel the level you want to play
      */
-    public void startGame() {
-        game.startLevel(1);
-        while (!game.levelIsOver()) {
+    public void startGame(int nLevel) {
+        game.startLevel(nLevel);
+        while (game.getLevelStatus() == LevelStatus.IN_PROGRESS) {
+            view.displayRemainingMoves((Game) game);
             view.displayBoard(game.getBoard(), game.getAnimals());
             Position pos = view.askPosition();
             while (!game.isAnimalPos(pos)) {
@@ -43,13 +46,18 @@ public class Controller {
 
             try {
                 game.move(pos, dir);
-                if(game.isAnimalPos(null)){
-                }
-
+                game.decrRemainingMoves();
             } catch (Exception e) {
                 view.displayError("animal fell of the board");
             }
         }
-        view.displayError("You've won!");
+        if (game.getLevelStatus() == LevelStatus.WIN){
+            view.displayError("You've won!");
+            startGame(++nLevel);
+        } else if (game.getLevelStatus() == LevelStatus.FAIL){
+            view.displayError("You've lost!");
+            startGame(nLevel);
+        }
+        
     }
 }

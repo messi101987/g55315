@@ -13,6 +13,16 @@ public class Game implements Model {
     private Board board;
 
     /**
+     * the remaining moves of the level
+     */
+    private int remainingMoves;
+
+    /**
+     * the current level
+     */
+    private int currentLevel;
+
+    /**
      * this is an array with all the Animals in the board
      */
     private Animal[] animals;
@@ -38,41 +48,65 @@ public class Game implements Model {
     }
 
     /**
+     * a getter for the remaining moves
+     *
+     * @return the remaining moves
+     */
+    @Override
+    public int getRemainingMoves() {
+        return remainingMoves;
+    }
+
+    /**
+     * checks the status of the level
+     *
+     * @return win if the game is won, in_progress if it is still in progress,
+     * fail if the game was lost and not_started if it was not started yet.
+     */
+    @Override
+    public LevelStatus getLevelStatus() {
+        LevelStatus status;
+        if (animals == null || board == null) {
+            status = LevelStatus.NOT_STARTED;
+        } else {
+            boolean fell = false;
+            for (Animal a : animals) {
+                if (a.getPositionOnBoard() == null) {
+                    fell = true;
+                }
+            }
+            if (fell) {
+                status = LevelStatus.FAIL;
+            } else {
+                boolean over = true;
+                for (Animal a : animals) {
+                    if (!a.isOnStar()) {
+                        over = false;
+                    }
+                }
+                if (over) {
+                    status = LevelStatus.WIN;
+                } else if (remainingMoves == 0) {
+                    status = LevelStatus.FAIL;
+                } else {
+                    status = LevelStatus.IN_PROGRESS;
+                }
+            }
+        }
+        return status;
+    }
+
+    /**
      * starts the game at a certain level
      *
      * @param level the chosen level
      */
     @Override
     public void startLevel(int level) {
-        Animal[] an = {new Ladybird(new Position(0, 1)), new Grasshopper(new Position(0, 0))
-        };
-        if (level == 1) {
-            this.board = Board.getInitialBoard();
-            this.animals = an;
-        }
-    }
-
-    /**
-     * controls if the level is over or not
-     *
-     * @return true if the level is over, false if not
-     */
-    @Override
-    public boolean levelIsOver() {
-        if (animals == null || board == null) {
-            throw new IllegalStateException("the game was not started yet");
-        }
-        boolean over = true;
-        boolean felt = false;
-        for (Animal a : animals) {
-            if (!a.isOnStar()) {
-                over = false;
-            }
-            if(a.getPositionOnBoard() == null){
-                felt = true;
-            }
-        }
-        return over || felt;
+        Level l = Level.getLevel(level);
+        this.board = l.getBoard();
+        this.animals = l.getAnimals();
+        this.remainingMoves = l.getnMoves();
     }
 
     /**
@@ -91,6 +125,14 @@ public class Game implements Model {
         }
         return animal_present;
     }
+    
+    /**
+     * decrements the remaining moves
+     */
+    @Override
+    public void decrRemainingMoves(){
+        this.remainingMoves--;
+    }
 
     /**
      * tries to move the animals in the game
@@ -104,10 +146,14 @@ public class Game implements Model {
         if (animals == null || board == null) {
             throw new IllegalStateException("the game was not started yet");
         }
-        for (Animal a : animals) {
-            if (a.getPositionOnBoard().equals(position) && !a.isOnStar()) {
-                Position new_pos = a.move(board, direction, animals);
+        if (getLevelStatus() == LevelStatus.IN_PROGRESS) {
+            for (Animal a : animals) {
+                if (a.getPositionOnBoard().equals(position) && !a.isOnStar()) {
+                    Position pos = a.move(board, direction, animals);
+                }
             }
+        } else {
+            throw new IllegalArgumentException("Game is not in progress");
         }
     }
 

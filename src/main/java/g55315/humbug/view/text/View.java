@@ -3,10 +3,9 @@ package g55315.humbug.view.text;
 import g55315.humbug.model.Animal;
 import g55315.humbug.model.Board;
 import g55315.humbug.model.Direction;
+import g55315.humbug.model.Game;
 import g55315.humbug.model.Position;
-import g55315.humbug.model.Snail;
 import g55315.humbug.model.SquareType;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -60,17 +59,17 @@ public class View implements InterfaceView {
                     if (board.getSquareType(pos) == SquareType.STAR) {
                         boardString[i * 4 + 2][j * 4 + 2] = "\033[42;38;1m\033[31m*\033[30m\033[0m";
                     }
-                    
-                    if(board.hasSquareWallDirection(pos, Direction.NORTH)){
+
+                    if (board.hasSquareWallDirection(pos, Direction.NORTH)) {
                         boardString[i * 4 + 1][j * 4 + 2] = "\033[41;38;1m \033[0m";
-                    } 
-                    if (board.hasSquareWallDirection(pos, Direction.SOUTH)){
+                    }
+                    if (board.hasSquareWallDirection(pos, Direction.SOUTH)) {
                         boardString[i * 4 + 3][j * 4 + 2] = "\033[41;38;1m \033[0m";
-                    } 
-                    if (board.hasSquareWallDirection(pos, Direction.WEST)){
+                    }
+                    if (board.hasSquareWallDirection(pos, Direction.WEST)) {
                         boardString[i * 4 + 2][j * 4 + 1] = "\033[41;38;1m \033[0m";
-                    } 
-                    if (board.hasSquareWallDirection(pos, Direction.EAST)){
+                    }
+                    if (board.hasSquareWallDirection(pos, Direction.EAST)) {
                         boardString[i * 4 + 2][j * 4 + 3] = "\033[41;38;1m \033[0m";
                     }
                 }
@@ -104,6 +103,14 @@ public class View implements InterfaceView {
     @Override
     public void displayError(String message) {
         System.out.println(message);
+    }
+
+    /**
+     * displays the remaining moves.
+     */
+    @Override
+    public void displayRemainingMoves(Game game) {
+        System.out.println(game.getRemainingMoves() + " remaining move(s)");
     }
 
     /**

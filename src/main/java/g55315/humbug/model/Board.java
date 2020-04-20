@@ -24,9 +24,7 @@ public class Board {
      * @return the new board
      */
     public static Board getInitialBoard() {
-        Square s = new Square(SquareType.GRASS);
-        s.setWestWall(true);
-        Square[][] tab = {{new Square(SquareType.GRASS), new Square(SquareType.GRASS), s},
+        Square[][] tab = {{new Square(SquareType.GRASS), new Square(SquareType.GRASS), null},
         {null, new Square(SquareType.GRASS), new Square(SquareType.GRASS)},
         {null, null, new Square(SquareType.STAR)}};
         return new Board(tab);
@@ -65,6 +63,9 @@ public class Board {
         }
         return move;
     }
+    
+    
+    
 
     /**
      * checks if the next position is in the board

@@ -58,6 +58,14 @@ public abstract class Animal {
 
     public abstract Position move(Board board, Direction direction, Animal... animals);
 
+    /**
+     * moves a jumping animal 1 square
+     *
+     * @param board the board in which the animal is
+     * @param direction the direction in which it will move
+     * @param animals the animals on the board
+     * @return the new position of the animal
+     */
     protected Position moveOneJumping(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
         if (board.isNextFree(pos, direction, animals)) {
@@ -69,6 +77,14 @@ public abstract class Animal {
         return pos;
     }
 
+    /**
+     * moves a crawling animal 1 square
+     *
+     * @param board the board in which the animal is
+     * @param direction the direction in which it will move
+     * @param animals the animals on the board
+     * @return the new position of the animal
+     */
     protected Position moveOneCrawling(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
         if (board.isInside(pos.next(direction))) {
@@ -81,6 +97,19 @@ public abstract class Animal {
             this.setPositionOnBoard(null);
         }
 
+        return pos;
+    }
+
+    protected Position moveOneFlying(Board board, Direction direction, Animal... animals) {
+        Position pos = this.getPositionOnBoard();
+        while (!board.isNextFree(pos, direction, animals)) {
+            pos = pos.next(direction);
+        }
+        pos = pos.next(direction);
+        if (!board.isInside(pos)) {
+            pos = null;
+        }
+        this.setPositionOnBoard(pos);
         return pos;
     }
 

@@ -30,6 +30,7 @@ public class Controller {
 
     /**
      * starts the game by initializing it on level 1, and starts a game loop
+     *
      * @param nLevel the level you want to play
      */
     public void startGame(int nLevel) {
@@ -51,13 +52,17 @@ public class Controller {
                 view.displayError("animal fell of the board");
             }
         }
-        if (game.getLevelStatus() == LevelStatus.WIN){
+        if (game.getLevelStatus() == LevelStatus.WIN) {
             view.displayError("You've won!");
-            startGame(++nLevel);
-        } else if (game.getLevelStatus() == LevelStatus.FAIL){
+            try{
+                startGame(++nLevel);
+            } catch (Exception e){
+                view.displayError("Game is finished");
+            }
+        } else if (game.getLevelStatus() == LevelStatus.FAIL) {
             view.displayError("You've lost!");
             startGame(nLevel);
         }
-        
+
     }
 }

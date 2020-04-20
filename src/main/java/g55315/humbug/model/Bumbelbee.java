@@ -15,9 +15,14 @@ public class Bumbelbee extends Animal {
         super(pos);
     }
 
+    public Bumbelbee() {
+        super();
+    }
+
     /**
      * moves a bumbelbee 2 cases
-     * @param board the board on which the bumblebee is 
+     *
+     * @param board the board on which the bumblebee is
      * @param direction the direction in which it has to move
      * @param animals the animals on the board
      * @return the new position of the bumbelbee
@@ -28,15 +33,15 @@ public class Bumbelbee extends Animal {
         pos = pos.next(direction);
         this.setPositionOnBoard(pos);
         pos = moveOneFlying(board, direction, animals);
-        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
+        if (this.getPositionOnBoard() != null && board.getSquareType(this.getPositionOnBoard()) == SquareType.STAR) {
             this.setOnStar(true);
-            board.setSquareGrass(pos);
+            board.setSquareGrass(this.getPositionOnBoard());
         }
         return pos;
     }
 
     /**
-     * 
+     *
      * @return the string printed on the board
      */
     @Override

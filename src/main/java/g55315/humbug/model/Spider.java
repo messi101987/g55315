@@ -16,6 +16,13 @@ public class Spider extends Animal {
     }
 
     /**
+     * a constructor for the class Spider
+     */
+    public Spider() {
+        super();
+    }
+
+    /**
      * moves the spider in a certain direction if possible
      *
      * @param board the board on which the spider is located

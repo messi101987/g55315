@@ -6,7 +6,7 @@
 package g55315.humbug;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.File;
+import g55315.humbug.model.Position;
 import java.io.IOException;
 
 /**
@@ -17,9 +17,8 @@ public class Json {
 
     public static void main(String[] args) throws IOException {
         var objectMapper = new ObjectMapper();
-        var file = new File("src/main/resources/data/test.json");
-        var jsonNode = objectMapper.readTree(file);
-        System.out.println(jsonNode);
-        System.out.println("Value: " + jsonNode.get("key").asText());
+        var in = Json.class.getResourceAsStream("/data/position.json"); 
+        Position position = objectMapper.readValue(in, Position.class); 
+        System.out.println("Position read: " + position);
     }
 }

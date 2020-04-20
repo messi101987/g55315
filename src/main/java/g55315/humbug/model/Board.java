@@ -19,6 +19,14 @@ public class Board {
     }
 
     /**
+     * constructor of the class Board
+     *
+     */
+    public Board() {
+        this.squares = null;
+    }
+
+    /**
      * initialises the board for the first level
      *
      * @return the new board
@@ -57,15 +65,12 @@ public class Board {
     public boolean isNextFree(Position pos, Direction direction, Animal... animals) {
         boolean move = true;
         for (Animal a : animals) {
-            if (a.getPositionOnBoard().equals(pos.next(direction))) {
+            if (!a.isOnStar() && a.getPositionOnBoard().equals(pos.next(direction))) {
                 move = false;
             }
         }
         return move;
     }
-    
-    
-    
 
     /**
      * checks if the next position is in the board
@@ -90,18 +95,17 @@ public class Board {
                 || (isNextInBoard(pos, dir)
                 && squares[pos.next(dir).getRow()][pos.next(dir).getColumn()].hasWall(dir.opposite()));
     }
-    
-    
+
     /**
      * checks if a square at a position has a wall in a certain direction
+     *
      * @param pos the position of the square we want to check
      * @param dir the direction in which we want to check
      * @return true if there is a wall in that direction, false if not
      */
-    public boolean hasSquareWallDirection(Position pos,Direction dir) {
+    public boolean hasSquareWallDirection(Position pos, Direction dir) {
         return squares[pos.getRow()][pos.getColumn()].hasWall(dir);
     }
-    
 
     /**
      * returns the type of a Square in a given position
@@ -130,6 +134,10 @@ public class Board {
 
     public int getNbColumn() {
         return this.squares[0].length;
+    }
+
+    public Square[][] getSquares() {
+        return squares;
     }
 
 }

@@ -14,6 +14,15 @@ public class Snail extends Animal {
     public Snail(Position pos) {
         super(pos);
     }
+    
+       /**
+     * a constructor for the class snail
+     */
+    public Snail() {
+        super();
+    }
+    
+    
 
     /**
      * moves the snail in a certain direction if possible

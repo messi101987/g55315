@@ -1,10 +1,25 @@
 package g55315.humbug.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+
 /**
  * an abstract class Animal
  *
  * @author oscartison
  */
+@JsonTypeInfo(use = Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY, 
+        property = "type")
+@JsonSubTypes({
+    @Type(value = Bumbelbee.class), 
+    @Type(value = Grasshopper.class), 
+    @Type(value = Ladybird.class), 
+    @Type(value = Snail.class), 
+    @Type(value = Spider.class),
+})
 public abstract class Animal {
 
     private Position positionOnBoard;
@@ -17,6 +32,16 @@ public abstract class Animal {
      */
     public Animal(Position position) {
         this.positionOnBoard = position;
+        this.onStar = false;
+    }
+    
+        /**
+     * the constructor of the class
+     *
+     * @param position the position of the animal when it's initialized
+     */
+    public Animal() {
+        this.positionOnBoard = new Position();
         this.onStar = false;
     }
 
@@ -106,9 +131,6 @@ public abstract class Animal {
             pos = pos.next(direction);
         }
         pos = pos.next(direction);
-        if (!board.isInside(pos)) {
-            pos = null;
-        }
         this.setPositionOnBoard(pos);
         return pos;
     }

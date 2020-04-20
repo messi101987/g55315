@@ -35,6 +35,19 @@ public class Square {
         this.southWall = false;
     }
 
+    
+     /**
+     * Constructor of Square on board. 
+     */
+    public Square() {
+        this.type = SquareType.GRASS;
+        this.eastWall = false;
+        this.westWall = false;
+        this.northWall = false;
+        this.southWall = false;
+    }
+    
+    
     /**
      * a simple setter
      *

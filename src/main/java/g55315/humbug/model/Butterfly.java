@@ -54,7 +54,7 @@ public class Butterfly extends Animal {
      */
     @Override
     public String toString() {
-        return "8";
+        return "\uD83E\uDD8B";
     }
 
 }

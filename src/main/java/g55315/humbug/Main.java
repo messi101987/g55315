@@ -12,6 +12,6 @@ import g55315.humbug.view.text.View;
 public class Main {
     public static void main(String[] args) {
         Controller controller = new Controller(new Game(), new View());
-        controller.startGame(40);
+        controller.startGame(1);
     }
 }

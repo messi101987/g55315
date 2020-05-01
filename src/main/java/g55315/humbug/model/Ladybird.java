@@ -59,7 +59,7 @@ public class Ladybird extends Animal {
      */
     @Override
     public String toString() {
-        return "Q";
+        return "\uD83D\uDC1E";
     }
 
 }

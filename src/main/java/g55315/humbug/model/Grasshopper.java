@@ -52,7 +52,7 @@ public class Grasshopper extends Animal {
      */
     @Override
     public String toString() {
-        return "G";
+        return "\uD83E\uDD97";
     }
 
 }

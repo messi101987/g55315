@@ -22,7 +22,7 @@ public class View implements InterfaceView {
      * @return the 2d array of Strings
      */
     public static String[][] makeStringBoard(Board board, Animal... animals) {
-        String[][] boardString = new String[4 * board.getNbRow() + 1][4 * board.getNbColumn() + 1];
+        String[][] boardString = new String[4 * board.getNbRow() + 1][6 * board.getNbColumn() + 1];
         for (String[] boardString1 : boardString) {
             for (int j = 0; j < boardString[0].length; j++) {
                 boardString1[j] = " ";
@@ -32,15 +32,15 @@ public class View implements InterfaceView {
             for (int j = 0; j < board.getNbColumn(); j++) {
                 Position pos = new Position(i, j);
                 if (board.isInside(pos)) {
-                    int pos_col = j * 4;
+                    int pos_col = j * 6;
                     int pos_row = i * 4;
-                    for (int x = 0; x < 5; x++) {
+                    for (int x = 0; x < 7; x++) {
                         boardString[pos_row][pos_col + x] = "\033[42;38;1m-\033[0m";
                     }
                     pos_row++;
                     for (int y = 0; y < 3; y++) {
-                        for (int x = 0; x < 5; x++) {
-                            if ((pos_col + x) % 4 == 0) {
+                        for (int x = 0; x < 7; x++) {
+                            if ((pos_col + x) % 6 == 0) {
                                 boardString[pos_row][pos_col + x] = "\033[42;38;1m|\033[0m";
                             } else {
                                 boardString[pos_row][pos_col + x] = "\033[42;38;1m \033[0m";
@@ -48,29 +48,34 @@ public class View implements InterfaceView {
                         }
                         pos_row++;
                     }
-                    for (int x = 0; x < 5; x++) {
+                    for (int x = 0; x < 7; x++) {
                         boardString[pos_row][pos_col + x] = "\033[42;38;1m-\033[0m";
                     }
                     for (Animal a : animals) {
                         if (a.getPositionOnBoard().equals(pos) && !a.isOnStar()) {
-                            boardString[i * 4 + 2][j * 4 + 2] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                            if ( a.toString().length() > 1) {
+                                 boardString[i * 4 + 2][j * 6 + 3] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                                  boardString[i * 4 + 2][j * 6 + 4] = "\033[42;38;1m\033[0m";
+                            } else {
+                                 boardString[i * 4 + 2][j * 4 + 3] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                            }
                         }
                     }
                     if (board.getSquareType(pos) == SquareType.STAR) {
-                        boardString[i * 4 + 2][j * 4 + 2] = "\033[42;38;1m\033[31m*\033[30m\033[0m";
+                        boardString[i * 4 + 2][j * 6 + 3] = "\033[42;38;1m\033[31m\u2605\033[30m\033[0m";
                     }
 
                     if (board.hasSquareWallDirection(pos, Direction.NORTH)) {
-                        boardString[i * 4 + 1][j * 4 + 2] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 1][j * 6 + 2] = "\033[41;38;1m \033[0m";
                     }
                     if (board.hasSquareWallDirection(pos, Direction.SOUTH)) {
-                        boardString[i * 4 + 3][j * 4 + 2] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 3][j * 6 + 2] = "\033[41;38;1m \033[0m";
                     }
                     if (board.hasSquareWallDirection(pos, Direction.WEST)) {
-                        boardString[i * 4 + 2][j * 4 + 1] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 2][j * 6 + 1] = "\033[41;38;1m \033[0m";
                     }
                     if (board.hasSquareWallDirection(pos, Direction.EAST)) {
-                        boardString[i * 4 + 2][j * 4 + 3] = "\033[41;38;1m \033[0m";
+                        boardString[i * 4 + 2][j * 6 + 3] = "\033[41;38;1m \033[0m";
                     }
                 }
             }

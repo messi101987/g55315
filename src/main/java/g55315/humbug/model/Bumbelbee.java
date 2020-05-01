@@ -46,7 +46,7 @@ public class Bumbelbee extends Animal {
      */
     @Override
     public String toString() {
-        return "B";
+        return "\uD83D\uDC1D";
     }
 
 }

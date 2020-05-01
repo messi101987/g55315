@@ -40,6 +40,9 @@ public class Ladybird extends Animal {
         Position pos = this.getPositionOnBoard();
         for (int i = 0; i < 2; i++) {
             pos = moveOneCrawling(board, direction, animals);
+            if(pos == null){
+                i = 2;
+            }
         }
         if (this.getPositionOnBoard() != null && board.getSquareType(this.getPositionOnBoard()) == SquareType.STAR) {
             this.setOnStar(true);

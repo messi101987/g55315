@@ -45,18 +45,15 @@ public class Controller {
             }
             Direction dir = view.askDirection();
 
-            try {
-                game.move(pos, dir);
-                game.decrRemainingMoves();
-            } catch (Exception e) {
-                view.displayError("animal fell of the board");
-            }
+            game.move(pos, dir);
+            game.decrRemainingMoves();
+
         }
         if (game.getLevelStatus() == LevelStatus.WIN) {
             view.displayError("You've won!");
-            try{
+            try {
                 startGame(++nLevel);
-            } catch (Exception e){
+            } catch (Exception e) {
                 view.displayError("Game is finished");
             }
         } else if (game.getLevelStatus() == LevelStatus.FAIL) {

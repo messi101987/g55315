@@ -11,15 +11,14 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
  * @author oscartison
  */
 @JsonTypeInfo(use = Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY, 
+        include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
-    @Type(value = Bumbelbee.class), 
-    @Type(value = Grasshopper.class), 
-    @Type(value = Ladybird.class), 
-    @Type(value = Snail.class), 
-    @Type(value = Spider.class),
-})
+    @Type(value = Bumbelbee.class),
+    @Type(value = Grasshopper.class),
+    @Type(value = Ladybird.class),
+    @Type(value = Snail.class),
+    @Type(value = Spider.class),})
 public abstract class Animal {
 
     private Position positionOnBoard;
@@ -34,8 +33,8 @@ public abstract class Animal {
         this.positionOnBoard = position;
         this.onStar = false;
     }
-    
-        /**
+
+    /**
      * the constructor of the class
      *
      * @param position the position of the animal when it's initialized
@@ -93,12 +92,14 @@ public abstract class Animal {
      */
     protected Position moveOneJumping(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
-        if (board.isNextFree(pos, direction, animals)) {
-            this.setPositionOnBoard(pos.next(direction));
-        } else {
-            this.setPositionOnBoard(pos.next(direction));
-            moveOneJumping(board, direction, animals);
+        while (!board.isNextFree(pos, direction, animals)) {
+            pos = pos.next(direction);
         }
+        pos = pos.next(direction);
+        if (!board.isInside(pos)) {
+            pos = null;
+        }
+        this.setPositionOnBoard(pos);
         return pos;
     }
 
@@ -115,12 +116,11 @@ public abstract class Animal {
         if (board.isInside(pos.next(direction))) {
             if (board.isNextFree(pos, direction, animals) && !(board.isNextWall(pos, direction))) {
                 pos = this.getPositionOnBoard().next(direction);
-                this.setPositionOnBoard(pos);
             }
         } else {
             pos = null;
-            this.setPositionOnBoard(null);
         }
+        this.setPositionOnBoard(pos);
 
         return pos;
     }
@@ -131,6 +131,9 @@ public abstract class Animal {
             pos = pos.next(direction);
         }
         pos = pos.next(direction);
+        if (!board.isInside(pos)) {
+            pos = null;
+        }
         this.setPositionOnBoard(pos);
         return pos;
     }

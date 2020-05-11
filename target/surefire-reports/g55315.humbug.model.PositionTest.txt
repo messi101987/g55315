@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: g55315.humbug.model.PositionTest
--------------------------------------------------------------------------------
-Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.194 s - in g55315.humbug.model.PositionTest

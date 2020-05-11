@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: g55315.humbug.model.BumbelbeeTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.053 s - in g55315.humbug.model.BumbelbeeTest

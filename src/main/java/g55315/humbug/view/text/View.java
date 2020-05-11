@@ -53,11 +53,11 @@ public class View implements InterfaceView {
                     }
                     for (Animal a : animals) {
                         if (a.getPositionOnBoard().equals(pos) && !a.isOnStar()) {
-                            if ( a.toString().length() > 1) {
-                                 boardString[i * 4 + 2][j * 6 + 3] = "\033[42;38;1m" + a.toString() + "\033[0m";
-                                  boardString[i * 4 + 2][j * 6 + 4] = "\033[42;38;1m\033[0m";
+                            if (a.toString().length() > 1) {
+                                boardString[i * 4 + 2][j * 6 + 3] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                                boardString[i * 4 + 2][j * 6 + 4] = "\033[42;38;1m\033[0m";
                             } else {
-                                 boardString[i * 4 + 2][j * 4 + 3] = "\033[42;38;1m" + a.toString() + "\033[0m";
+                                boardString[i * 4 + 2][j * 4 + 3] = "\033[42;38;1m" + a.toString() + "\033[0m";
                             }
                         }
                     }

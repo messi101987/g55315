@@ -98,5 +98,4 @@ public class LadybirdTest {
         assertEquals(expResult, result);
     }
 
-
 }

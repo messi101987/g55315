@@ -43,6 +43,7 @@ public interface InterfaceView {
 
     /**
      * displays the remaining moves.
+     *
      * @param game the game that is currently played
      */
     void displayRemainingMoves(Game game);

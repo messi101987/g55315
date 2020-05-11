@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
     @Type(value = Grasshopper.class),
     @Type(value = Ladybird.class),
     @Type(value = Snail.class),
+    @Type(value = Butterfly.class),
     @Type(value = Spider.class),})
 public abstract class Animal {
 
@@ -35,9 +36,7 @@ public abstract class Animal {
     }
 
     /**
-     * the constructor of the class
-     *
-     * @param position the position of the animal when it's initialized
+     * a constructor of the class Animal
      */
     public Animal() {
         this.positionOnBoard = new Position();
@@ -83,14 +82,14 @@ public abstract class Animal {
     public abstract Position move(Board board, Direction direction, Animal... animals);
 
     /**
-     * moves a jumping animal 1 square
+     * moves a jumping or flying animal 1 square
      *
      * @param board the board in which the animal is
      * @param direction the direction in which it will move
      * @param animals the animals on the board
      * @return the new position of the animal
      */
-    protected Position moveOneJumping(Board board, Direction direction, Animal... animals) {
+    protected Position moveOneAerial(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
         while (!board.isNextFree(pos, direction, animals)) {
             pos = pos.next(direction);
@@ -125,17 +124,18 @@ public abstract class Animal {
         return pos;
     }
 
-    protected Position moveOneFlying(Board board, Direction direction, Animal... animals) {
-        Position pos = this.getPositionOnBoard();
-        while (!board.isNextFree(pos, direction, animals)) {
-            pos = pos.next(direction);
+    /**
+     * checks wether an animal is on a star, if it is the case the onStar
+     * attribute of the animal is set on true
+     *
+     * @param board the board on which the animal is
+     * @param pos the position of the animal
+     */
+    protected void setOnStar(Board board, Position pos) {
+        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
+            this.setOnStar(true);
+            board.setSquareGrass(this.getPositionOnBoard());
         }
-        pos = pos.next(direction);
-        if (!board.isInside(pos)) {
-            pos = null;
-        }
-        this.setPositionOnBoard(pos);
-        return pos;
     }
 
 }

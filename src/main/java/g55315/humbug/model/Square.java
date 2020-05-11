@@ -35,8 +35,7 @@ public class Square {
         this.southWall = false;
     }
 
-    
-     /**
+    /**
      * Constructor of Square on board. 
      */
     public Square() {
@@ -46,8 +45,7 @@ public class Square {
         this.northWall = false;
         this.southWall = false;
     }
-    
-    
+
     /**
      * a simple setter
      *
@@ -95,6 +93,7 @@ public class Square {
 
     /**
      * checks if there is a wall in a certain direction
+     *
      * @param d the direction that needs to be checked for a wall
      * @return true if there is a wall in that direction, false if not.
      */

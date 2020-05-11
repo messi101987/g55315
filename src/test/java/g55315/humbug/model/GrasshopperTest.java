@@ -98,5 +98,4 @@ public class GrasshopperTest {
         assertEquals(expResult, result);
     }
 
-
 }

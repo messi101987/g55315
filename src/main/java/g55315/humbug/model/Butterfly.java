@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
@@ -40,11 +35,8 @@ public class Butterfly extends Animal {
         Position pos = this.getPositionOnBoard();
         pos = pos.next(direction).next(direction);
         this.setPositionOnBoard(pos);
-        pos = moveOneFlying(board, direction, animals);
-        if (this.getPositionOnBoard() != null && board.getSquareType(this.getPositionOnBoard()) == SquareType.STAR) {
-            this.setOnStar(true);
-            board.setSquareGrass(this.getPositionOnBoard());
-        }
+        pos = this.moveOneAerial(board, direction, animals);
+        setOnStar(board, pos);
         return pos;
     }
 

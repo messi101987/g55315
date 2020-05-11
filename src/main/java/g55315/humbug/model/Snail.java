@@ -14,15 +14,13 @@ public class Snail extends Animal {
     public Snail(Position pos) {
         super(pos);
     }
-    
-       /**
+
+    /**
      * a constructor for the class snail
      */
     public Snail() {
         super();
     }
-    
-    
 
     /**
      * moves the snail in a certain direction if possible
@@ -35,11 +33,7 @@ public class Snail extends Animal {
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = moveOneCrawling(board, direction, animals);
-        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
-            this.setOnStar(true);
-            board.setSquareGrass(pos);
-        }
-
+        setOnStar(board, pos);
         return pos;
     }
 
@@ -47,5 +41,4 @@ public class Snail extends Animal {
     public String toString() {
         return "\uD83D\uDC0C";
     }
-
 }

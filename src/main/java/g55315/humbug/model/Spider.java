@@ -36,16 +36,16 @@ public class Spider extends Animal {
         while (pos != null && board.isNextFree(pos, direction, animals) && !(board.isNextWall(pos, direction))) {
             pos = moveOneCrawling(board, direction, animals);
         }
-
         this.setPositionOnBoard(pos);
-
-        if ((pos != null) && (board.getSquareType(pos) == SquareType.STAR)) {
-            this.setOnStar(true);
-            board.setSquareGrass(pos);
-        }
+        setOnStar(board, pos);
         return pos;
     }
 
+    /**
+     * a toString for the class Spider
+     *
+     * @return the string to display on the board
+     */
     @Override
     public String toString() {
         return "\uD83D\uDD77";

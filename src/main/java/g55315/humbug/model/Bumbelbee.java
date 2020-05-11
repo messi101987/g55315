@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
@@ -11,10 +6,18 @@ package g55315.humbug.model;
  */
 public class Bumbelbee extends Animal {
 
+    /**
+     * a constructor for the class Bumbelbee
+     *
+     * @param pos the position of the bumbelbee
+     */
     public Bumbelbee(Position pos) {
         super(pos);
     }
 
+    /**
+     * a constructor for the class Bumbelbee
+     */
     public Bumbelbee() {
         super();
     }
@@ -26,17 +29,14 @@ public class Bumbelbee extends Animal {
      * @param direction the direction in which it has to move
      * @param animals the animals on the board
      * @return the new position of the bumbelbee
-     */ 
+     */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
         Position pos = this.getPositionOnBoard();
         pos = pos.next(direction);
         this.setPositionOnBoard(pos);
-        pos = this.moveOneFlying(board, direction, animals);
-        if (pos != null && board.getSquareType(pos) == SquareType.STAR) {
-            this.setOnStar(true);
-            board.setSquareGrass(this.getPositionOnBoard());
-        }
+        pos = this.moveOneAerial(board, direction, animals);
+        setOnStar(board, pos);
         return pos;
     }
 

@@ -125,12 +125,12 @@ public class Game implements Model {
         }
         return animal_present;
     }
-    
+
     /**
      * decrements the remaining moves
      */
     @Override
-    public void decrRemainingMoves(){
+    public void decrRemainingMoves() {
         this.remainingMoves--;
     }
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
@@ -27,10 +22,11 @@ public interface Model {
 
     /**
      * a getter for the remaining moves of the level
+     *
      * @return the remaining moves
      */
     int getRemainingMoves();
-    
+
     /**
      * starts the game at a certain level
      *
@@ -40,6 +36,7 @@ public interface Model {
 
     /**
      * gets the status of the level
+     *
      * @return the status in which the level is currently is.
      */
     LevelStatus getLevelStatus();
@@ -59,7 +56,7 @@ public interface Model {
      * @param direction the direction in which the animal has to move.
      */
     void move(Position position, Direction direction);
-    
+
     /**
      * decrements the remaining moves
      */

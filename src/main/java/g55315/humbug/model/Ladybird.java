@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
@@ -40,15 +35,11 @@ public class Ladybird extends Animal {
         Position pos = this.getPositionOnBoard();
         for (int i = 0; i < 2; i++) {
             pos = moveOneCrawling(board, direction, animals);
-            if(pos == null){
+            if (pos == null) {
                 i = 2;
             }
         }
-        if (this.getPositionOnBoard() != null && board.getSquareType(this.getPositionOnBoard()) == SquareType.STAR) {
-            this.setOnStar(true);
-            board.setSquareGrass(this.getPositionOnBoard());
-        }
-
+        setOnStar(board, pos);
         return pos;
     }
 

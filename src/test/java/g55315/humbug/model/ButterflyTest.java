@@ -17,10 +17,9 @@ public class ButterflyTest {
     public void setUp() {
         board = new Board(new Square[][]{
             {new Square(GRASS), new Square(GRASS), new Square(GRASS), new Square(GRASS), new Square(GRASS)},
-            {null, new Square(GRASS), new Square(GRASS), new Square(GRASS),new Square(GRASS)},
-            {null, null, new Square(GRASS), new Square(GRASS),new Square(GRASS)},
-            {new Square(GRASS), null, new Square(STAR), new Square(GRASS),new Square(GRASS)},
-        });
+            {null, new Square(GRASS), new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+            {null, null, new Square(GRASS), new Square(GRASS), new Square(GRASS)},
+            {new Square(GRASS), null, new Square(STAR), new Square(GRASS), new Square(GRASS)},});
         animals = new Animal[]{
             new Butterfly(new Position(0, 0)),
             new Butterfly(new Position(1, 2))

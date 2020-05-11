@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package g55315.humbug.model;
 
 /**
@@ -37,11 +32,8 @@ public class Grasshopper extends Animal {
      */
     @Override
     public Position move(Board board, Direction direction, Animal... animals) {
-        Position pos = moveOneJumping(board, direction, animals);
-        if (this.getPositionOnBoard() != null && board.getSquareType(this.getPositionOnBoard()) == SquareType.STAR) {
-            this.setOnStar(true);
-            board.setSquareGrass(this.getPositionOnBoard());
-        }
+        Position pos = this.moveOneAerial(board, direction, animals);
+        setOnStar(board, pos);
         return pos;
     }
 

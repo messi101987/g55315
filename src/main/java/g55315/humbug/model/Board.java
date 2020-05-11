@@ -125,17 +125,28 @@ public class Board {
     }
 
     /**
+     * a getter for the number of rows of the board
      *
-     * @return
+     * @return the number of rows
      */
     public int getNbRow() {
         return this.squares.length;
     }
 
+    /**
+     * a getter for the number of columns of the board
+     *
+     * @return the number of columns
+     */
     public int getNbColumn() {
         return this.squares[0].length;
     }
 
+    /**
+     * a getter for the array representing the board
+     *
+     * @return the array representing the board
+     */
     public Square[][] getSquares() {
         return squares;
     }
